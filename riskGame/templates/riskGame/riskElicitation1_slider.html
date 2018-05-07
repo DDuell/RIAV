@@ -1,0 +1,99 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+<strong>Stage 2: Question 1</strong>
+{% endblock %}
+
+{% block styles %}
+<link href="{% static "my_battle_of_the_sexes/jquery-ui/jquery-ui.min.css" %}" rel="stylesheet">
+<style type="text/css">
+    #right { 
+        width: 45%; 
+        margin: 5px; 
+        padding: 1em; 
+        background: white; 
+    } 
+
+    #right { float:right; }
+    
+    img {
+        height: 200px;
+        width: 200px;
+        -o-object-fit: contain;
+    }
+    p {
+        font-size: 110%;
+        font-style: bold;
+    }
+
+    .bid-slider {
+        margin: 1.5em auto;
+        width: 70%;
+    }
+
+    .bid-slider_self {
+        margin: 1.5em auto;
+        width: 70%;
+    }
+
+    .bid {
+        text-align: center;
+    }
+
+    .payoff {
+        margin: 1.5em 0;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<p>
+When you consider again what happened in Stage 2, in particular the choice made by you.
+</p>
+
+<p>
+What would you say, on average, was your willingness to make a risky choice on a scale from 1 (very risk averse) to 100 (very risk seeking)?	
+</p>
+<div class="form-group required">
+<label class="control-label" for="id_bid_amount_self"></label>
+<div class="controls">
+<input type="hidden" name="bid_amount_self" id="id_bid_amount_self" value="0"
+min="0" max="100"  add data-show-value="true">
+<div class="bid-slider_self"></div>
+<div class="bid">You say, on average, you score a <strong><span class="bid-value"></span></strong> as your willingness to make a risky choice.
+</div>  
+</div>
+</div>
+
+{% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "riskGame/jquery-ui/jquery-ui.min.js" %}"></script>
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+    var input = $('#id_bid_amount_self');
+
+    $('.bid-slider_self').slider({
+        min: 0,
+        max: 100,
+        slide: function (event, ui) {
+            input.val(ui.value);
+            updateBidValue();
+        },
+    });
+    function updateBidValue() {
+        $('.bid-value_self').text(input.val());
+    }
+    function calculatePayoff() {
+        var value = parseInt(input.val());
+    }
+
+
+    updateBidValue();
+});
+</script>
+{% endblock %}

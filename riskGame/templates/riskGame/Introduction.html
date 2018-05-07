@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+	<strong>Stage 3</strong>
+{% endblock %}
+
+{% block content %}
+<p>
+We are now starting <strong>Stage 3</strong> of the experiment. Please hit the 'Next' button to enter round 1 of stage 3. You will find the instructions for the game and the payoffs for round 1 on the bottom of the next screen. 
+</p>
+	
+<span align="right">
+{% next_button %}
+</span>
+
+{% endblock %}
+
+
+
+

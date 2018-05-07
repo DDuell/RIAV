@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block content %}
+
+<p>
+Suppose that Player 1 choses <strong>left</strong> and Player 2 choses <strong>up</strong>. What would be their payoffs 
+respectively?
+</p>
+<p>
+{% formfield player.quiz_question_player1 with label='Payoff for Player 1 would be:' %}
+</p>
+<p>
+{% formfield player.quiz_question_player2 with label='Payoff for Player 2 would be:' %}
+</p>
+
+{% next_button %}
+
+{% include 'groupAssignment2/Instructions.html' %}
+
+{% endblock %}

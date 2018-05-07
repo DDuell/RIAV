@@ -1,0 +1,9 @@
+{% extends 'otree/WaitPage.html' %}
+{% load staticfiles otree_tags %}
+{% block title %}{{ title_text }}{% endblock %}
+{% block content %}
+    {{ body_text }}
+    <p>
+        Please wait while the other participants finish reading the instructions. 
+    </p>
+{% endblock %}
