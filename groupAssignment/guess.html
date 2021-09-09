@@ -1,0 +1,31 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+Stage 1
+<br><br>
+You are a {{ player.groupID }} <img src="{% static "groupAssignment/" %}{{ player.groupID }}_C.jpg" style="float:right;height:50px; width = 50px">
+<hr>
+{% endblock %}
+
+{% block content %}
+<p>
+Who is the painter of the following painting? Please make a guess and check the appropriate box below.<br><br> 
+Your guess is <b>NOT</b> the final answer.
+</p>
+
+<p>
+<img src="{% static "groupAssignment/" %}1.jpg" style="width:30%">
+</p>
+
+{% formfield player.guess label='Please give your guess: Who is the painter of this painting?' %}
+
+{% formfield player.help label='Would you like to see the guesses of other members of your group in this study so far to help you choose your final answer?'%}
+
+<br><br>
+<p>
+Please press the 'Next' button to give your final answer and possibly see the guesses of other {{ player.groupID }}s.
+</p>
+
+{% next_button %}
+{% endblock %}

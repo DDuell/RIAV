@@ -1,0 +1,32 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+Stage 1
+<br><br>
+You are a {{ player.groupID }} <img src="{% static "groupAssignment/" %}{{ groupID }}_C.jpg" style="float:right;height:50px; width = 50px">
+<hr>
+{% endblock %}
+
+{% block content %}
+<p>
+In the remainder of Stage 1 of the study you will collaborate with other {{ player.groupID }}s in the study in solving a quiz question. In this quiz you are shown a painting and asked to guess the painter of the painting. 
+<br><br>
+The painter will be either Paul Klee or Vassily Kandinsky.
+<br><br>
+Your guess will NOT be the final answer to the quiz question. After you submitted your guess you will be able to see what other {{ player.groupID }}s in the study so far guessed to help you choose the final answer. Similarly, your guess may be helpful to your fellow {{ player.groupID }}s in the study in making their choices. Then, you are asked to submit your final answer to the quiz question. 
+<br><br>
+If at least half of the {{ player.groupID }}s in the study so far gave a correct final answer, you will receive <strong>{{ Constants.painterQuiz_reward }} Points</strong>. 
+<br><br>
+Additionally, when more {{ player.groupID }}s than members of 
+{{ if player.treatment == 'identity4groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+any of the other groups 
+{{ else }} 
+the other group 
+{{ endif }} 
+gave the correct answer in the study so far, you and the other {{ player.groupID }}s will receive yet another <strong>{{ Constants.painterQuiz_reward }} Points </strong> in Stage 1.
+</p>
+<p>
+Please press the 'Next' button to proceed.
+</p>
+{% next_button %} {% endblock %} 

@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Start of the study
+{% endblock %}
+
+{% block content %}
+
+<p>
+The study proceeds in several stages. <br><br>
+
+In addition to your reward for participating in this study, you will be able to <strong>earn additional points</strong> in each of these stages. You will be told how you can earn these points and will receive the points converted into U.S. Dollars together with your participation reward <strong>within the day once you completed the study</strong>. <br><br>
+Points are converted into U.S. Dollars at a rate of {{ exchange_rate }} Points for 1 U.S. Dollar.
+<br><br>
+
+Remember, you always need to press the <strong>'Next'</strong> button to advance to the next screen. Please press the 'Next' button to continue. 
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+{% endblock %}

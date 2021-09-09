@@ -1,0 +1,28 @@
+Let's see whether you understood the rules. The question was: <br>
+
+<i>Suppose that <strong>1</strong> of the other participants chooses <strong>A</strong> and <strong>2</strong> of the other participants choose <strong>B</strong>. How many points would you earn if you <strong>choose A</strong>
+</i>
+
+{{ if player.quizQuestion1 == Constants.quizQuestion1_correct }}
+<p class="text-success">You are correct, you would earn {{player.quizQuestion1}} Points from <strong>choosing A</strong>.
+</p>
+
+{{ else }}
+<p class="text-danger">Your answer {{player.quizQuestion1}} was incorrect. You would earn {{Constants.quizQuestion1_correct}} Points from <strong>choosing A</strong>.
+</p>
+{{ endif }}
+
+<i>
+And: How many points would you earn if you <strong>choose B</strong>
+</i>
+{{ if player.quizQuestion2 == Constants.quizQuestion2_correct }}
+<p class="text-success">You are correct, you would earn {{player.quizQuestion1}} Points from <strong>choosing B.</p>
+
+{{ else }}
+<p class="text-danger">Your answer {{player.quizQuestion2}} was incorrect. You would earn {{Constants.quizQuestion2_correct}} Points from <strong>choosing B</strong>.</p>
+{{ endif }}
+
+You can read off your earnings from <strong>choosing A</strong> or <strong>B</strong> by looking at the <strong>third row</strong> in the payoff table below. 
+
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_quizFeedback.jpg" %} style="float:center;max-width:600px;height:auto">
+

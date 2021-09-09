@@ -1,0 +1,17 @@
+<p>
+Here is one version of the game you may be playing with <strong>3 other participants</strong> in a moment. You are asked to make a choice between options <strong>A</strong> and <strong>B</strong>: <br><br>
+<img src={% static "riskGame2/strategicUncertainty_payoffTable_quiz.jpg" %} style="float:center;max-width:600px;height:auto">
+<br><br>
+
+You can read off your additional bonus from <strong>choosing A</strong> or <strong>choosing B</strong> by looking at a row that corresponds to the other participants' choices in the payoff table above. For example, suppose you choose B and 2 other participants choose A, then you can read off your additional bonus in the <strong>second row</strong> of the table above. It would be <strong>7 Points</strong>. 
+<br><br>
+
+Now here is a question to check whether you understood the rules. Suppose that <strong>1</strong> of the other participants chooses <strong>A</strong> and <strong>2</strong> of the other participants choose <strong>B</strong>.
+</p>
+<p>
+{% formfield player.quizQuestion1 label='How many points would you earn if you <strong>choose A</strong>?' %}
+</p>
+<p>
+{% formfield player.quizQuestion2 label='How many points would you earn if you <strong>choose B</strong>?' %}
+</p>
+

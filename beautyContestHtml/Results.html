@@ -1,0 +1,28 @@
+<p>
+One player guessed <strong>{{ player.otherChoice1 }}</strong>, <br><br>
+another player guessed <strong>{{ player.otherChoice2  }}</strong>, <br><br>
+and yet another player guessed <strong>{{ player.otherChoice3  }}</strong>.
+<br><br>
+You guessed <strong>{{ player.choice }}.</strong>
+<br><br>
+The average of the guesses of you and the other participants is {{ player.average }}.
+<br><br>
+Two thirds of the average of the guesses of all players is {{ player.twoThirdsAverage }}.
+<br><br>
+
+{{ if player.closestGuess == 1 }}
+Your guess was the closest guess to two thirds of the average of the guesses of all players. {{ else }}
+Your guess was not the closest guess to two thirds of the average of the guesses of all players.
+{{ endif }}
+<br><br>
+
+As a result, your earned <strong>{{ player.beautyContest_payoffs }} Points</strong> in Stage {{ player.numStage }}.
+</p>
+
+<p>
+Please hit the 'Next' button to proceed to Stage {{ nextStage }}.
+</p>	
+
+
+
+

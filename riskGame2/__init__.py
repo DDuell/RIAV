@@ -1,0 +1,385 @@
+from otree.api import *
+import random
+from decimal import Decimal
+
+#******************************************************************************#
+# Constants
+#******************************************************************************#
+class Constants(BaseConstants):
+    name_in_url = 'riskGame2'
+    players_per_group = None
+    num_rounds = 1 
+    quizQuestion1_correct = 4
+    quizQuestion2_correct = 12
+
+#******************************************************************************#
+# Subsession
+#******************************************************************************#
+class Subsession(BaseSubsession): 
+    pass
+  
+#******************************************************************************#
+# Group
+#******************************************************************************#
+class Group(BaseGroup):
+    pass
+                          
+#******************************************************************************#
+# Player
+#******************************************************************************#
+class Player(BasePlayer):
+  treatment = models.CharField()
+  orderOfApps = models.IntegerField()
+  groupID = models.CharField()
+  numStage = models.IntegerField()
+  playerInGame = models.IntegerField()
+  choice1Done = models.CharField()
+  otherGroupID1 = models.CharField()
+  otherGroupID2 = models.CharField()
+  otherGroupID3 = models.CharField()
+  allA_payoffs1 = models.IntegerField()
+  allA_payoffs2 = models.IntegerField()
+  otherChoice1 = models.CharField()
+  otherChoice2 = models.CharField()
+  otherChoice3 = models.CharField()
+  riskGameOtherChoice1 = models.IntegerField()
+  riskGameOtherChoice2 = models.IntegerField()
+  riskGameOtherChoice3 = models.IntegerField()
+  riskGame_payoffs = models.IntegerField(initial = 0)
+  choice1 = models.CharField(
+      choices=['A', 'B'],
+      widget=widgets.RadioSelect())
+  choice2 = models.CharField(
+      choices=['A', 'B'],
+      widget=widgets.RadioSelect())
+  quizQuestion1 = models.IntegerField(
+      choices=[4,7,12,18],
+      max_digits=2,
+      widget=widgets.RadioSelect())
+  quizQuestion2 = models.IntegerField(
+      choices=[4,7,12,18],
+      max_digits=2,
+      widget=widgets.RadioSelect())
+  treatmentThreshold1 = models.IntegerField()
+  treatmentThreshold2 = models.IntegerField()
+  treatmentThresholdForPayoff = models.IntegerField()
+  choiceNumForPayoff = models.IntegerField()
+  choiceForPayoff = models.CharField()
+  allA_payoffsForPayoff = models.IntegerField()
+  
+#******************************************************************************#
+# Pages
+#******************************************************************************#
+# Risk game introduction
+#*****************************************************************************#
+class RiskGameIntroduction(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+      player.orderOfApps = player.participant.orderOfApps
+      return player.orderOfApps==2
+    
+    @staticmethod
+    def vars_for_template(player: Player):
+      player.treatment = player.participant.treatment
+      if (player.treatment=='identity' or player.treatment=='noIdentity' or
+        player.treatment=='identity4Groups'):
+          player.treatmentThreshold1 = 4
+      else:
+        player.treatmentThreshold1 = 3
+      player.numStage = player.participant.numStage
+      player.allA_payoffs1 = player.participant.allA_payoffs1
+      player.allA_payoffs2 = player.participant.allA_payoffs2
+      
+      if (player.treatment != 'noIdentity' and
+          player.treatment != 'noIdentityLowThreshold'):
+        player.groupID = player.participant.groupID    
+        player.otherGroupID1 = player.participant.otherGroupID1
+        player.otherGroupID2 = player.participant.otherGroupID2
+        player.otherGroupID3 = player.participant.otherGroupID3
+      
+      players = player.subsession.get_players()  
+      for p in players: 
+        p.choice1Done = 'Not yet chosen'
+        
+#*****************************************************************************#
+# Quiz
+#*****************************************************************************#
+class Quiz(Page):
+    form_model = 'player'
+    form_fields = ['quizQuestion1','quizQuestion2']
+    
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.orderOfApps==2
+               
+#*****************************************************************************#
+# Quiz feedback
+#*****************************************************************************#
+class QuizFeedback(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.orderOfApps==2
+        
+#*****************************************************************************#
+# Choice 1
+#*****************************************************************************#
+class Choice1(Page):
+    form_model = 'player'
+    form_fields = ['choice1']
+    
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.orderOfApps==2
+
+#*****************************************************************************#
+# Choice 2
+#*****************************************************************************#
+class Choice2(Page):
+    form_model = 'player'
+    form_fields = ['choice2']
+    
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.orderOfApps==2
+    
+    @staticmethod 
+    def vars_for_template(player: Player): 
+        if (player.treatmentThreshold1==4):
+          player.treatmentThreshold2 = 3
+        else: 
+          player.treatmentThreshold2 = 4
+        
+#*****************************************************************************#
+# Results
+#*****************************************************************************#
+class Results(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+      return player.orderOfApps==2
+    
+    @staticmethod 
+    def vars_for_template(player: Player):
+      players = player.subsession.get_players()
+      playersDone = [p for p in players if p.choice1Done!='Not yet chosen']
+      if (player.participant.treatment!='noIdentity' and 
+        player.participant.treatment!='noIdentityLowThreshold'):
+          klees = [p for p in playersDone if p.groupID == 'Klee']
+          kandinskys = [p for p in playersDone if p.groupID == 'Kandinsky']
+          chagalls = [p for p in playersDone if p.groupID == 'Chagall']
+          picassos = [p for p in playersDone if p.groupID == 'Picasso']
+      
+      # No identity treatment
+      if (player.participant.treatment=='noIdentity' or 
+        player.participant.treatment=='noIdentityLowThreshold'):
+          if len(playersDone)>2:
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = playersDone[-1].choice1
+              player.otherChoice2 = playersDone[-2].choice1
+              player.otherChoice3 = playersDone[-3].choice1
+            else:
+              player.otherChoice1 = playersDone[-1].choice2
+              player.otherChoice2 = playersDone[-2].choice2
+              player.otherChoice3 = playersDone[-3].choice2
+          elif len(playersDone)==2:
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = playersDone[-1].choice1
+              player.otherChoice2 = playersDone[-2].choice1
+            else:
+              player.otherChoice1 = playersDone[-1].choice2
+              player.otherChoice2 = playersDone[-2].choice2
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3 
+          elif len(playersDone)==1:
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = playersDone[-1].choice1
+            else:
+              player.otherChoice1 = playersDone[-1].choice2
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3   
+          else:
+            player.otherChoice1 = player.participant.riskGame1OtherChoice1
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2 
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3 
+      
+      else:  
+        # Identity treatments
+        if (player.otherGroupID1=="Klee"):
+          if (len(klees)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = klees[-1].choice1
+            else:
+              player.otherChoice1 = klees[-1].choice2
+          else:
+            player.otherChoice1 = player.participant.riskGame1OtherChoice1 
+        elif (player.otherGroupID1=="Kandinsky"):
+          if (len(kandinskys)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = kandinskys[-1].choice1
+            else:
+              player.otherChoice1 = kandinskys[-1].choice2
+          else:
+            player.otherChoice1 = player.participant.riskGame1OtherChoice1   
+        elif (player.otherGroupID1=="Chagall"):
+          if (len(chagalls)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = chagalls[-1].choice1
+            else:
+              player.otherChoice1 = chagalls[-1].choice2
+          else:
+            player.otherChoice1 = player.participant.riskGame1OtherChoice1   
+        elif (player.otherGroupID1=="Picasso"):
+          if (len(picassos)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice1 = chagalls[-1].choice1
+            else:
+              player.otherChoice1 = chagalls[-1].choice2
+          else:
+            player.otherChoice1 = player.participant.riskGame1OtherChoice1  
+
+        if (player.otherGroupID2=="Klee"):
+          if (len(klees)>1):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice2 = klees[-1].choice1
+            else:
+              player.otherChoice2 = klees[-1].choice2
+          else:
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2 
+        elif (player.otherGroupID2=="Kandinsky"):
+          if (len(kandinskys)>1):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice2 = kandinskys[-1].choice1
+            else:
+              player.otherChoice2 = kandinskys[-1].choice2
+          else:
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2   
+        elif (player.otherGroupID2=="Chagall"):
+          if (len(chagalls)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice2 = chagalls[-1].choice1
+            else:
+              player.otherChoice2 = chagalls[-1].choice2
+          else:
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2   
+        elif (player.otherGroupID2=="Picasso"):
+          if (len(picassos)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice2 = picassos[-1].choice1
+            else:
+              player.otherChoice2 = picassos[-1].choice2
+          else:
+            player.otherChoice2 = player.participant.riskGame1OtherChoice2 
+ 
+        if (player.otherGroupID3=="Klee"):
+          if (len(klees)>1):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice3 = klees[-1].choice1
+            else:
+              player.otherChoice3 = klees[-1].choice2
+          else:
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3 
+        elif (player.otherGroupID3=="Kandinsky"):
+          if (len(kandinskys)>1):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice3 = kandinskys[-1].choice1
+            else:
+              player.otherChoice3 = kandinskys[-1].choice2
+          else:
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3   
+        elif (player.otherGroupID3=="Chagall"):
+          if (len(chagalls)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice3 = chagalls[-1].choice1
+            else:
+              player.otherChoice3 = chagalls[-1].choice2
+          else:
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3   
+        elif (player.otherGroupID3=="Picasso"):
+          if (len(picassos)>0):
+            if player.choiceNumForPayoff==1:
+              player.otherChoice3 = picassos[-1].choice1
+            else:
+              player.otherChoice3 = picassos[-1].choice2
+          else:
+            player.otherChoice3 = player.participant.riskGame1OtherChoice3 
+      player.choiceNumForPayoff = player.participant.choiceNumForPayoff  
+      if player.choiceNumForPayoff==1:
+        player.treatmentThresholdForPayoff = player.treatmentThreshold1
+        player.choiceForPayoff = player.choice1
+        player.allA_payoffsForPayoff = player.allA_payoffs1
+      else: 
+        player.treatmentThresholdForPayoff = player.treatmentThreshold2
+        player.choiceForPayoff = player.choice2
+        player.allA_payoffsForPayoff = player.allA_payoffs2
+      otherChoices = player.otherChoice1 + player.otherChoice2 + player.otherChoice3
+      # A,A top left  
+      if player.allA_payoffsForPayoff==15:
+        if (player.treatmentThresholdForPayoff==4):
+          if player.choiceForPayoff=='A':
+            if otherChoices=='AAA':
+              payoff = 15
+            else: 
+              payoff = 0
+          else:
+            if otherChoices=='BBB':
+              payoff = 10
+            else: 
+              payoff = 8
+        else:
+          if player.choiceForPayoff=='A':
+            if (otherChoices=='AAA' or otherChoices=='AAB' or 
+                otherChoices=='ABA' or otherChoices=='BAA'):
+              payoff = 15
+            else: 
+              payoff = 0
+          else:
+            if (otherChoices=='BBB' or otherChoices=='BBA' or 
+                otherChoices=='BAB' or otherChoices=='BBA'):
+              payoff = 10
+            else: 
+              payoff = 8
+      # B,B top left  
+      else:
+        if (player.treatmentThresholdForPayoff==4):
+          if player.choiceForPayoff=='B':
+            if otherChoices=='BBB':
+              payoff = 15
+            else: 
+              payoff = 0
+          else:
+            if otherChoices=='AAA':
+              payoff = 10
+            else: 
+              payoff = 8
+        else:
+          if player.choiceForPayoff=='B':
+            if (otherChoices=='BBB' or otherChoices=='BBA' or 
+                otherChoices=='BAB' or otherChoices=='ABB'):
+              payoff = 15
+            else: 
+              payoff = 0
+          else:
+            if (otherChoices=='AAA' or otherChoices=='AAB' or 
+                otherChoices=='ABA' or otherChoices=='BAA'):
+              payoff = 10
+            else: 
+              payoff = 8
+            
+      player.riskGame_payoffs = payoff 
+      player.participant.riskGame_payoffs = player.riskGame_payoffs
+ 
+      return {
+            'nextStage': player.numStage + 1 
+        }
+    @staticmethod
+    def before_next_page(player: Player,timeout_happened):
+      player.participant.numStage = player.participant.numStage + 1
+               
+#*****************************************************************************#
+                             
+page_sequence = [
+    RiskGameIntroduction,
+    Quiz,
+    QuizFeedback,
+    Choice1,
+    Choice2,
+    Results
+]

@@ -1,0 +1,71 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+Stage 1: Earnings 
+<br><br>
+You are a {{ player.groupID }} <img src="{% static "groupAssignment/" %}{{ player.groupID }}_C.jpg" style="float:right;height:50px; width = 50px">
+<hr>
+{% endblock %}
+
+{% block content %}
+
+<p>
+The artist who painted this painting is
+{% if Constants.painterQuiz_answer == 1 %}
+<strong>Klee.</strong>
+{% else %}
+<strong>Kandinsky.</strong>
+{% endif %} <br><br><br>
+
+{% if player.painterQuiz_payoff > 0  %}
+A least half of {{ player.groupID }}s in the study (including you) chose 
+	{% if Constants.painterQuiz_answer == 1 %}
+		Klee
+	{% else %}
+		Kandinsky	
+	{% endif %}
+	as their quiz answer so far. 
+{% else %}
+Less than half of {{ player.groupID }}s in the study (including you) chose 
+	{% if Constants.painterQuiz_answer == 1 %}
+		Klee
+	{% else %}
+		Kandinsky
+	{% endif %}
+	as their quiz answer so far. 
+{% endif %} <br><br>
+
+{% if player.painterQuiz_additionalPayoff > 0  %}
+At least as many {{ player.groupID }}s as members of 
+{{ if player.treatment == 'identity4groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+  each of the other groups 
+{{ else }} 
+  the other group 
+{{ endif }}
+in the study so far gave the correct answer.
+{% endif %}
+
+{% if player.painterQuiz_additionalPayoff == 0  %}
+Fewer {{ player.groupID }}s as members of {{ if player.treatment == 'identity4groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+  each of the other groups 
+{{ else }} 
+  the other group 
+{{ endif }}
+in the study so far gave the correct answer. 
+{% endif %} <br><br><br>
+
+{% if player.painterQuiz_totalPayoff > 0  %}
+For these outcomes, you receive <strong>{{ player.painterQuiz_totalPayoff }} Points </strong> for Stage 1.
+{% else %}
+For these outcomes, you receive <strong>no additional points</strong> for Stage 1.
+{% endif %}
+</p> <br><br>
+
+<p>
+Please press the 'Next' button to proceed to Stage 2 of the study.
+</p>
+</p>
+
+{% next_button %}
+{% endblock %}

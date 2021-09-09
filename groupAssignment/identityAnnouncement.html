@@ -1,0 +1,89 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Stage 1: Group assignment
+{% endblock %}
+
+{% block content %}
+<p>
+<hr>
+You have been assigned to a group we will call <strong>{{ player.groupID }}s</strong>, named after the famous painter 
+{{ if player.groupID == 'Klee' }}
+Paul Klee.
+{{ elif player.groupID == 'Kandinsky' }}
+Vassily Kandinsky.
+{{ elif player.groupID == 'Chagall' }}
+Marc Chagall
+{{ else }}
+Pablo Picasso.
+{{ endif }}
+
+All members of your group will, in this study, be referred to as <strong>{{ player.groupID }}s</strong>, and we will use one of {{ player.groupID }}'s paintings as a visual indicator of your group membership. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}{{ player.groupID }}_C.jpg" style="height:150px; width = 150px">
+</p>
+<hr>
+
+{{ if player.treatment == 'identity' or player.treatment == 'identityLowThreshold' }}
+Some of the other participants in the study were assigned to a group named after another famous painter, 
+{{ if player.groupID == 'Klee' }}
+Vassily Kandinsky. We will refer to them as Kandinskys and use one of Kandinsky's paintings as a visual indicator of their group membership. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Kandinsky_C.jpg" style="height:50px; width = 50px">
+</p> 
+{{ else }}
+Paul Klee. We will refer to them as Klees and use one of Klee's paintings as a visual indicator of their group membership. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Klee_C.jpg" style="height:50px; width = 50px">
+</p>  
+{{ endif }}
+
+{{ else }}
+Some of the other participants in the study were assigned to groups named after the other famous painters, 
+{{ if player.groupID == 'Klee' }}
+Vassily Kandinsky, Marc Chagall, and Pablo Picasso. We will refer to them as Kandinskys, Chagalls, and Picassos and use those painter's paintings as a visual indicator of their group memberships. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Kandinsky_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Chagall_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Picasso_C.jpg" style="height:50px; width = 50px">
+</p>  
+{{ elif player.groupID == 'Kandinsky' }}
+Paul Klee, Marc Chagall, and Pablo Picasso. We will refer to them as Klees, Chagalls, and Picassos and use those painter's paintings as a visual indicator of their group memberships. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Klee_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Chagall_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Picasso_C.jpg" style="height:50px; width = 50px">
+</p>
+{{ elif player.groupID == 'Chagall' }}
+Paul Klee, Vassily Kandinsky, and Pablo Picasso. We will refer to them as Klees, Kandinskys, and Picassos and use those painter's paintings as a visual indicator of their group memberships. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Klee_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Chagall_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Picasso_C.jpg" style="height:50px; width = 50px">
+</p>
+{{ else }}
+Paul Klee, Vassily Kandinsky, and Marc Chagall. We will refer to them as Klees, Kandinskys, and Chagalls and use those painter's paintings as a visual indicator of their group memberships. 
+</p>
+<p style="text-align:center;">
+<img src="{% static "groupAssignment/" %}Klee_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Kandinsky_C.jpg" style="height:50px; width = 50px">
+<img src="{% static "groupAssignment/" %}Chagall_C.jpg" style="height:50px; width = 50px">
+</p>
+{{ endif }}
+{{ endif }}
+
+<p>  
+Please note that the names assigned to these groups have no substantive meaning. 
+</p>
+<p>
+Please press the 'Next' button to proceed.
+</p>
+
+{% next_button %} {% endblock %} 

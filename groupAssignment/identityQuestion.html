@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Stage 1: Group assignment
+{% endblock %}
+
+{% block content %}
+
+<p>
+We now start with Stage 1 of the study.
+</p>
+<br>
+
+<p>
+People often define themselves in terms of membership in social groups. We sometimes identify with being female, a student, or a fan of sports team.
+Please take a moment to think about yourself. Which group characteristics are important to you? What defines your social identity?  
+<br>
+<br>
+Please name the group characteristic that is the most important to how you define yourself:
+</p>
+
+{% formfield player.identity1 %} 
+
+<p>
+<br>
+Please name the group characteristic that is the second most important to how you define yourself:
+</p>
+{% formfield player.identity2 %} <br><br>
+
+<p>
+Your answers may be used to assign you to a group. This assignment could be such that it results in groups of study participants who are <strong>similar in their responses to the above group identity questions</strong>. However, it could also be that participants are assigned to a group <strong>randomly</strong>.
+</p> 
+
+<br><br>
+
+<span align="right">
+{% next_button %}
+</span>
+{% endblock %}
+
+<script>
+document.getElementById('identity1').value = ' ';
+document.getElementById('identity2').value = ' ';
+</script>

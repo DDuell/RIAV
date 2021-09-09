@@ -1,0 +1,19 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Stage {{ player.numStage }}: Comprehension Quiz
+<br><br>
+{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+You are a {{ player.groupID }} <img src="{% static "groupAssignment/" %}{{ player.groupID }}_C.jpg" style="float:right;height:50px;width: 50px">
+{{ endif }}
+<hr>
+{% endblock %}
+
+{% block content %}
+
+{% include 'riskGameHtml/Quiz.html' %}
+
+{% next_button %}
+
+{% endblock %}

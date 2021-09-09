@@ -1,0 +1,29 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+
+You are a {{ groupID }} <img src="{% static "groupAssignment/" %}{{ groupID }}_C.jpg" style="float:right;height:50px; width = 50px">
+<hr>
+
+Stage 1: Final earnings
+{% endblock %}
+
+{% block content %}
+<p>
+{% if additional_payoff > 0  %}
+You and other {{ groupID }}s gave correct answers to the {{ round_number }} quiz questions at least as often as the {{ groupID_other }}s. In addition to the {{ cum_payoff }} you earned in Stage 1 so far, you will receive {{ additional_payoff }} for this outcome. 
+{% endif %}
+{% if additional_payoff == 0  %}
+You and other {{ groupID }}s gave fewer correct answers to the three quiz questions than the {{ groupID_other }}s. No additional earnings are added to the {{ cum_payoff }} you earned so far in Stage 1. 
+{% endif %}
+</p>
+
+<p>
+Please press the 'Next' button to proceed to Stage 2 of the experiment.
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+{% endblock %}

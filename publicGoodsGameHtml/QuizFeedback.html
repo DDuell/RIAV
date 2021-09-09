@@ -1,0 +1,17 @@
+Let's see whether you understood the rules. The question was: <br>
+
+<i>Say the the other 3 participants and you are all sharing 5 Points with the group. What would be your earnings in Points from this game?
+</i>
+
+{{ if player.quizQuestion == Constants.quizQuestion_correct }}
+<p class="text-success">You are correct, you would earn {{Constants.quizQuestion_correct}} Points.
+</p>
+
+{{ else }}
+<p class="text-danger">Your answer {{player.quizQuestion}} was incorrect. You would earn {{Constants.quizQuestion_correct}} Points.
+</p>
+{{ endif }}
+
+<p>All togehter everyone shared 20 Points and those multiplied by 2 is 40. Your share would then be 10 Points. Taking off what you shared yourself, 5, your earnings would be 5 Points. 
+</p>
+

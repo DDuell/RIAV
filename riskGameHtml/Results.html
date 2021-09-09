@@ -1,0 +1,55 @@
+<p>
+Below is the version of the game that was randomly chosen for determining your earnings from Stage {{ player.numStage }}: 
+
+{{ if player.treatmentThresholdForPayoff == 3 and player.allA_payoffsForPayoff == 15 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThresholdForPayoff == 4 and player.allA_payoffsForPayoff == 15 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThresholdForPayoff == 3 and player.allA_payoffsForPayoff == 10 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3_reversed.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThresholdForPayoff == 4 and player.allA_payoffsForPayoff == 10 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4_reversed.jpg" %} style="float:center;height:300px;width:600px">
+{{ endif }}
+<br><br>
+  
+{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+You played this game with 
+a <strong>{{ player.otherGroupID1 }}</strong> who chose <strong>{{ player.otherChoice1 }}</strong>
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID1 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br><br>
+
+{{ if player.otherGroupID1 == player.otherGroupID2 }}
+another <strong>{{ player.otherGroupID2 }}</strong> who chose <strong>{{ player.otherChoice2 }}</strong>
+{{ elif player.otherGroupID1 != player.otherGroupID2 }}
+a <strong>{{ player.otherGroupID2 }}</strong> who chose <strong>{{ player.otherChoice2 }}</strong>
+{{ endif }}
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID2 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br><br>
+
+{{ if player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
+and another <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+{{ elif player.otherGroupID1 == player.otherGroupID2 and player.otherGroupID1 == player.otherGroupID3}}
+and yet another <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+{{ else }}
+and a <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+{{ endif }}
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID3 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br>
+
+{{ else }}
+One player chose <strong>{{ player.otherChoice1 }}</strong>, <br><br>
+another player chose <strong>{{ player.otherChoice2 }}</strong>, <br><br>
+and yet another player chose <strong>{{ player.otherChoice3 }}</strong>.
+
+{{ endif }}
+<br><br>
+You chose <strong>{{ player.choiceForPayoff }}</strong>.
+<br><br>
+
+As a result, your earned <strong>{{ player.riskGame_payoffs }} Points</strong> in Stage {{ player.numStage }}.
+</p>
+
+<p>
+Please hit the 'Next' button to proceed to Stage {{ nextStage }}.
+</p>	
+

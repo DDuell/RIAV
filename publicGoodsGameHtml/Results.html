@@ -1,0 +1,43 @@
+<p>
+{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+You played this game with 
+a <strong>{{ player.otherGroupID1 }}</strong> who shared <strong>{{ player.otherChoice1 }} Points</strong>
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID1 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br><br>
+
+{{ if player.otherGroupID1 == player.otherGroupID2 }}
+another <strong>{{ player.otherGroupID2 }}</strong> who shared <strong>{{ player.otherChoice2 }} Points</strong>
+{{ elif player.otherGroupID1 != player.otherGroupID2 }}
+a <strong>{{ player.otherGroupID2 }}</strong> who shared <strong>{{ player.otherChoice2 }} Points</strong>
+{{ endif }}
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID2 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br><br>
+
+{{ if player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
+and another <strong>{{ player.otherGroupID3 }}</strong> who shared <strong>{{ player.otherChoice3 }} Points</strong>.
+{{ elif player.otherGroupID1 == player.otherGroupID2 and player.otherGroupID1 == player.otherGroupID3}}
+and yet another <strong>{{ player.otherGroupID3 }}</strong> who shared <strong>{{ player.otherChoice3 }} Points</strong>.
+{{ else }}
+and a <strong>{{ player.otherGroupID3 }}</strong> who shared <strong>{{ player.otherChoice3 }} Points</strong>.
+{{ endif }}
+<img src="{% static "groupAssignment/" %}{{ player.otherGroupID3 }}_C.jpg" style="float:right;height:50px;width: 50px">
+<br><br>
+
+{{ else }}
+One player shared <strong>{{ player.otherChoice1 }} Points</strong>, <br><br>
+another player shared <strong>{{ player.otherChoice2 }} Points</strong>, <br><br>
+and yet another player shared <strong>{{ player.otherChoice3 }} Points</strong>.
+
+{{ endif }}
+<br><br>
+You shared <strong>{{ player.choice }} Points</strong>.
+<br><br>
+
+As a result, your earned <strong>{{ player.publicGoodsGame_payoffs }} Points</strong> in Stage {{ player.numStage }}.
+</p>
+
+<p>
+Please hit the 'Next' button to proceed to Stage {{ nextStage }}.
+</p>	
+
+
