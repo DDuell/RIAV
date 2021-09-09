@@ -2,7 +2,6 @@ from otree.api import *
 import random
 import json
 import csv
-import numpy as np
 
 #******************************************************************************#
 # Constants
@@ -97,11 +96,9 @@ class experimentIntroduction(Page):
       player.participant.allA_payoffs1 = random.choice([15,10])
       player.participant.allA_payoffs2 = random.choice([15,10])
       player.participant.choiceNumForPayoff = random.choice([1,2])
-      mu1 = Constants.endowment/2
-      sigma1 = Constants.endowment/10
-      player.participant.PGOtherChoice1 = round(np.random.randn()*sigma1+mu1)
-      player.participant.PGOtherChoice2 = round(np.random.randn()*sigma1+mu1)
-      player.participant.PGOtherChoice3 = round(np.random.randn()*sigma1+mu1)
+      player.participant.PGOtherChoice1 = random.randint(0,Constants.endowment)
+      player.participant.PGOtherChoice2 = random.randintmu1(0,Constants.endowment)
+      player.participant.PGOtherChoice3 = random.randintmu1(0,Constants.endowment)
       player.participant.riskGame1OtherChoice1 = random.choice(['A','B'])
       player.participant.riskGame1OtherChoice2 = random.choice(['A','B'])
       player.participant.riskGame1OtherChoice3 = random.choice(['A','B'])
@@ -109,11 +106,9 @@ class experimentIntroduction(Page):
       player.participant.riskGame2OtherChoice2 = random.choice(['A','B'])
       player.participant.riskGame2OtherChoice3 = random.choice(['A','B'])
       player.participant.choiceNumForPayoff = random.choice([1,2])  
-      mu2 = 35
-      sigma2 = 5
-      player.participant.beautyOtherChoice1 = np.random.randn()*sigma2+mu2
-      player.participant.beautyOtherChoice2 = np.random.randn()*sigma2+mu2
-      player.participant.beautyOtherChoice3 = np.random.randn()*sigma2+mu2
+      player.participant.beautyOtherChoice1 = random.randint(15,60)
+      player.participant.beautyOtherChoice2 = random.randint(15,60)
+      player.participant.beautyOtherChoice3 = random.randint(15,60)
       players = player.subsession.get_players() 
       for p in players: 
         p.participant.groupID = 'Not yet assigned'
