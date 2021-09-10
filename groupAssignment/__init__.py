@@ -2,8 +2,7 @@ from otree.api import *
 import random
 from decimal import Decimal
 from otree.lookup import url_i_should_be_on, get_page_lookup, get_min_idx_for_app
-from thefuzz import fuzz
-from thefuzz import process
+from fuzzywuzzy import fuzz
 
 #******************************************************************************#
 # Constants
