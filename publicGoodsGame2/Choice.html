@@ -6,7 +6,16 @@ Stage {{ player.numStage }}
 <br><br>
 {{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
 
-You are a {{ player.groupID }} <img src="{% static "groupAssignment/" %}{{ player.groupID }}_C.jpg" style="float:right;height:50px;width: 50px">
+You are a {{ player.groupID }} 
+{{ if player.groupID == 'Klee' }}
+<img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">
+{{ elif player.groupID == 'Kandinsky' }}
+<img src="{{ static 'groupAssignment/Kandinsky_C.jpg'}}" style="height:50px; width = 50px">
+{{ elif player.groupID == 'Chagall' }}
+<img src="{{ static 'groupAssignment/Chagall_C.jpg'}}" style="height:50px; width = 50px">
+{{ else }}
+<img src="{{ static 'groupAssignment/Picasso_C.jpg'}}" style="height:50px; width = 50px">
+{{ endif }}
 {{ endif }}
 <hr>
 {% endblock %}
