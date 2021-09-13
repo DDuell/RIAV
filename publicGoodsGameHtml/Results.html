@@ -2,7 +2,15 @@
 {{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
 You played this game with 
 a <strong>{{ player.otherGroupID1 }}</strong> who shared <strong>{{ player.otherChoice1 }} Points</strong>
-<img src="{% static "groupAssignment/" %}{{ player.otherGroupID1 }}_C.jpg" style="float:right;height:50px;width: 50px">
+{{ if player.otherGroupID1 == 'Klee' }}
+<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID1 == 'Kandinsky' }}
+<img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID1 == 'Chagall' }}
+<img src="{{ static 'groupAssignment/Chagall_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID1 == 'Picasso' }}
+<img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ endif }}
 <br><br><br>
 
 {{ if player.otherGroupID1 == player.otherGroupID2 }}
@@ -10,7 +18,15 @@ another <strong>{{ player.otherGroupID2 }}</strong> who shared <strong>{{ player
 {{ elif player.otherGroupID1 != player.otherGroupID2 }}
 a <strong>{{ player.otherGroupID2 }}</strong> who shared <strong>{{ player.otherChoice2 }} Points</strong>
 {{ endif }}
-<img src="{% static "groupAssignment/" %}{{ player.otherGroupID2 }}_C.jpg" style="float:right;height:50px;width: 50px">
+{{ if player.otherGroupID2 == 'Klee' }}
+<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID2 == 'Kandinsky' }}
+<img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID2 == 'Chagall' }}
+<img src="{{ static 'groupAssignment/Chagall_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID2 == 'Picasso' }}
+<img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ endif }}
 <br><br><br>
 
 {{ if player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
@@ -20,7 +36,15 @@ and yet another <strong>{{ player.otherGroupID3 }}</strong> who shared <strong>{
 {{ else }}
 and a <strong>{{ player.otherGroupID3 }}</strong> who shared <strong>{{ player.otherChoice3 }} Points</strong>.
 {{ endif }}
-<img src="{% static "groupAssignment/" %}{{ player.otherGroupID3 }}_C.jpg" style="float:right;height:50px;width: 50px">
+{{ if player.otherGroupID3 == 'Klee' }}
+<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID3 == 'Kandinsky' }}
+<img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID3 == 'Chagall' }}
+<img src="{{ static 'groupAssignment/Chagall_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ elif player.otherGroupID3 == 'Picasso' }}
+<img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
+{{ endif }}
 <br><br>
 
 {{ else }}
