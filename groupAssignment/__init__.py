@@ -161,7 +161,7 @@ class identityQuestion(Page):
                 player.participant.groupID = player.participant.groupIDRandom2
           
           # Find closest identity match in treatment with 4 groups     
-          if (player.treatment == 'identity4Groups' or player.treatment == 'identityLowThreshold4Groups'):
+          if (player.treatment == 'identity4Groups' or player.treatment == 'identity4GroupsLowThreshold'):
             if (player.matchRatioKlees > 50 and player.matchRatioKandinskys < 50
               and player.matchRatioChagalls < 50 and player.matchRatioPicassos < 50):
                 player.participant.groupID = 'Klee'
