@@ -47,7 +47,7 @@ class Player(BasePlayer):
 #******************************************************************************#
 # Beauty contest introduction
 #*****************************************************************************#
-class BeautyContestIntroduction(Page):
+class beautyContestIntroduction(Page):
     @staticmethod
     def vars_for_template(player: Player):
       player.treatment = player.participant.treatment
@@ -118,7 +118,7 @@ class Results(Page):
 #*****************************************************************************#
                              
 page_sequence = [
-    BeautyContestIntroduction,
+    beautyContestIntroduction,
     Choice,
     Results
 ]
