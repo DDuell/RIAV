@@ -43,7 +43,7 @@ Kandinsky.
 Please give your <b>final</b> answer. If more than half of {{ player.groupID }}s in this study so far (including you) picked the correct answer you receive <strong>{{ Constants.painterQuiz_reward }} Points</strong>.
 </p>
 
-<img src="{% static "groupAssignment/" %}1.jpg" style="width:30%">
+<img src="{{ static 'groupAssignment/1.jpg'}}" style="width:30%">
 
 {% formfield player.answer label="Please give your final answer: Who is the painter of this painting?" %}
 

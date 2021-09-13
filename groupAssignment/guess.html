@@ -24,7 +24,7 @@ Your guess is <b>NOT</b> the final answer.
 </p>
 
 <p>
-<img src="{% static "groupAssignment/" %}1.jpg" style="width:30%">
+<img src="{{ static 'groupAssignment/1.jpg' }}" style="width:30%">
 </p>
 
 {% formfield player.guess label='Please give your guess: Who is the painter of this painting?' %}
