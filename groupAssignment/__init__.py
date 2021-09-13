@@ -42,7 +42,7 @@ class Player(BasePlayer):
     matchRatioPicassos = models.IntegerField(initial=0)
     guess = models.PositiveIntegerField(
         label='',
-        initial=None,
+        initial=99,
         choices=[(1, 'Klee'), (0, 'Kandinsky'),],
         verbose_name='',
         widget=widgets.RadioSelectHorizontal()
@@ -56,7 +56,7 @@ class Player(BasePlayer):
     )   
     answer = models.IntegerField(
         label='',
-        initial=None, 
+        initial=99, 
         choices=[(1, 'Klee'), (0, 'Kandinsky'), ],
         widget=widgets.RadioSelectHorizontal()
     )  
@@ -235,12 +235,12 @@ class answer(Page):
     @staticmethod
     def vars_for_template(player: Player):  
         players = player.subsession.get_players()
-        playersWithGroupID=[p for p in players if p.groupID!='Not assigned yet']
+        playersGuessDone=[p for p in players if p.guess==99]
         if player.playerInSession > 1:
-          klees = [p for p in playersWithGroupID if p.groupID == 'Klee']
-          kandinskys = [p for p in playersWithGroupID if p.groupID == 'Kandinsky']
-          chagalls = [p for p in playersWithGroupID if p.groupID == 'Chagall']
-          picassos = [p for p in playersWithGroupID if p.groupID == 'Picasso']
+          klees = [p for p in playersGuessDone if p.groupID == 'Klee']
+          kandinskys = [p for p in playersGuessDone if p.groupID == 'Kandinsky']
+          chagalls = [p for p in playersGuessDone if p.groupID == 'Chagall']
+          picassos = [p for p in playersGuessDone if p.groupID == 'Picasso']
         
           if len(klees) > 1: 
             player.num_klees = len(klees)
@@ -311,12 +311,12 @@ class results(Page):
     @staticmethod   
     def vars_for_template(player: Player):
         players = player.subsession.get_players()  
-        playersWithGroupID=[p for p in players if p.groupID!='Not assigned yet']
+        playersAnswerDone=[p for p in players if p.answer==99]
         if player.playerInSession > 1:
-          klees = [p for p in playersWithGroupID if p.groupID == 'Klee']
-          kandinskys = [p for p in playersWithGroupID if p.groupID == 'Kandinsky'] 
-          chagalls = [p for p in playersWithGroupID if p.groupID == 'Chagall']
-          picassos = [p for p in playersWithGroupID if p.groupID == 'Picasso']
+          klees = [p for p in playersAnswerDone if p.groupID == 'Klee']
+          kandinskys = [p for p in playersAnswerDone if p.groupID == 'Kandinsky'] 
+          chagalls = [p for p in playersAnswerDone if p.groupID == 'Chagall']
+          picassos = [p for p in playersAnswerDone if p.groupID == 'Picasso']
         
           if len(klees) > 1:
             num_klees_half = len(klees)/2
