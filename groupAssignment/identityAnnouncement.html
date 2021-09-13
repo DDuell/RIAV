@@ -22,7 +22,15 @@ Pablo Picasso.
 All members of your group will, in this study, be referred to as <strong>{{ player.groupID }}s</strong>, and we will use one of {{ player.groupID }}'s paintings as a visual indicator of your group membership. 
 </p>
 <p style="text-align:center;">
-  <img src="{{ static 'groupAssignment/'{{ player.groupID }}'_C.jpg'}}" style="height:150px; width = 150px">
+{{ if player.groupID == 'Klee' }}
+<img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:150px; width = 150px">
+{{ elif player.groupID == 'Kandinsky' }}
+<img src="{{ static 'groupAssignment/Kandinsky_C.jpg'}}" style="height:150px; width = 150px">
+{{ elif player.groupID == 'Chagall' }}
+<img src="{{ static 'groupAssignment/Chagall_C.jpg'}}" style="height:150px; width = 150px">
+{{ else }}
+<img src="{{ static 'groupAssignment/Picasso_C.jpg'}}" style="height:150px; width = 150px">
+{{ endif }}
 </p>
 <hr>
 
