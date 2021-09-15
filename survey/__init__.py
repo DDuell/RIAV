@@ -100,7 +100,7 @@ class finalPayoffs(Page):
       
     @staticmethod
     def before_next_page(player: Player,timeout_happened):  
-      participant.finished = True 
+      player.participant.finished = True 
 
 page_sequence = [
     questions,
