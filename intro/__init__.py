@@ -75,7 +75,8 @@ class experimentIntroduction(Page):
     player.participant.otherChagallsIdentity = ['']
     player.participant.otherPicassosIdentity = ['']
     return {
-      'exchange_rate': round(player.session.config['real_world_currency_per_point']*100)
+      'exchange_rate': round(player.session.config['real_world_currency_per_point']*100),
+      'participation_fee': player.session.config['participation_fee']
       }
       
   @staticmethod

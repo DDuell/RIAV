@@ -28,7 +28,7 @@ The artist who painted this painting is
 {% endif %} <br><br><br>
 
 {% if player.painterQuiz_payoff > 0  %}
-A least half of {{ player.groupID }}s in the study (including you) chose 
+A least half of {{ player.groupID }}s in the study chose 
 	{% if Constants.painterQuiz_answer == 1 %}
 		Klee
 	{% else %}
@@ -36,7 +36,7 @@ A least half of {{ player.groupID }}s in the study (including you) chose
 	{% endif %}
 	as their quiz answer so far. 
 {% else %}
-Less than half of {{ player.groupID }}s in the study (including you) chose 
+Less than half of {{ player.groupID }}s in the study chose 
 	{% if Constants.painterQuiz_answer == 1 %}
 		Klee
 	{% else %}
@@ -47,7 +47,7 @@ Less than half of {{ player.groupID }}s in the study (including you) chose
 
 {% if player.painterQuiz_additionalPayoff > 0  %}
 At least as many {{ player.groupID }}s as members of 
-{{ if player.treatment == 'identity4groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+{{ if player.treatment == 'identity4Groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
   each of the other groups 
 {{ else }} 
   the other group 
