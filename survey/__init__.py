@@ -97,6 +97,10 @@ class finalPayoffs(Page):
       return {
         'participation_fee':participation_fee
       }
+      
+    @staticmethod
+    def before_next_page(player: Player):  
+      participant.finished = True 
 
 page_sequence = [
     questions,

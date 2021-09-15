@@ -30,6 +30,8 @@ SESSION_CONFIGS = [
     # ),
 ]
 
+SESSION_FIELDS = ['prolific_completion_url']
+
 PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','numGame',
     'playerInSession','identity1','identity2','groupID',
     'groupIDRandom2','groupIDRandom4',
@@ -49,8 +51,9 @@ PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','numGame',
     'riskGame1OtherChoice1','riskGame1OtherChoice2','riskGame1OtherChoice3',
     'riskGame2OtherChoice1','riskGame2OtherChoice2','riskGame2OtherChoice3',
     'choiceNumForPayoff',
-    'PGOtherChoice1','PGOtherChoice2','PGOtherChoice3']
-SESSION_FIELDS = []
+    'PGOtherChoice1','PGOtherChoice2','PGOtherChoice3',
+    'finished']
+
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = False
 POINTS_DECIMAL_PLACES = 2
