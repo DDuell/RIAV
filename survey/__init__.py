@@ -63,11 +63,11 @@ class Player(BasePlayer):
         choices=['0','1','2','3','4','5','6','7','8','9','10','No group assigned'],
         widget=widgets.RadioSelectHorizontal())
     
-    q_whatAbout = models.CharField(verbose_name='What do you think was this experimenter about?')
+    q_whatAbout = models.TextField(verbose_name='What do you think was this experimenter about?')
         
-    q_choices = models.CharField(verbose_name='In stage 2 of the experiment, how did you make your choice between A and B?')
+    q_choices = models.TextField(verbose_name='In stage 2 of the experiment, how did you make your choice between A and B?')
     
-    q_clear = models.CharField(verbose_name='Where the instructions clear? If not, which part of the instructions was not clear?')
+    q_clear = models.TextField(verbose_name='Where the instructions clear? If not, which part of the instructions was not clear?')
     gameEarnings = models.CurrencyField(initial = 0)
     totalEarnings = models.CurrencyField(initial = 0)
   

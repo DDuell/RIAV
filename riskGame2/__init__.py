@@ -81,6 +81,7 @@ class Player(BasePlayer):
   choiceForPayoff = models.CharField()
   beliefForPayoff = models.CharField()
   allA_payoffsForPayoff = models.IntegerField()
+  feedback1 = models.TextField()
   
 #******************************************************************************#
 # Pages
@@ -173,6 +174,9 @@ class Choice2(Page):
 # Results
 #*****************************************************************************#
 class Results(Page):
+    form_model = 'player'
+    form_fields = ['feedback1']
+    
     @staticmethod
     def is_displayed(player: Player):
       return player.orderOfApps==2
