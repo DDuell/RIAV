@@ -13,9 +13,9 @@ td, th {
 </style>
 
 {% block title %}
-Stage {{ player.numStage }}
+Stage {{ player.numStage }}: Decision 2
 <br><br>
-{{ if player.treatment != 'noIdentity' }}: Decision 2
+{{ if player.treatment != 'noIdentity' }}
 You are a {{ player.groupID }} 
 {{ if player.groupID == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">
