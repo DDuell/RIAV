@@ -1,7 +1,7 @@
 <p>
 Now, let's play the game:<br><br>
 
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+{{ if player.treatment != 'noIdentity' }}
 You are playing this game with 
 a <strong>{{ player.otherGroupID1 }}</strong>
 {{ if player.otherGroupID1 == 'Klee' }}
@@ -55,10 +55,9 @@ and a <strong>{{ player.otherGroupID3 }}</strong>.
 You are playing this game with 3 other players.
 {{ endif }}
 </strong>
-<br><br>
 </p>	
 
-{% formfield player.choice label="How much do you want to share with the group? You can share nothing (=0 Points) up to the full amount of your endowment (=10 Points)" %}	
+{% formfield player.choice label=choice_label %}	
 
 
 

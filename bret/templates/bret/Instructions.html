@@ -15,20 +15,18 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-<p align="left">
-Stage {{ player.numStage }}
-</p>
+Stage {{ player.numStage }}: Instructions
 <hr>
 {% endblock %}
-
 
 {# ****************************************************************************************************************** #}
 {# *** CONTENT *** #}
 {# ****************************************************************************************************************** #}
 {% block content %}
-<p align="left">
-In Stage {{ player.numStage }} of the study, you are going to play this game by yourself. 
+<p>
+You are now entering Stage {{ player.numStage }} of the experiment. In this stage you will be playing a game by yourself.
 </p>
+
     <div class="instructions">
         <p>
             {% blocktrans trimmed %}

@@ -32,7 +32,7 @@ SESSION_CONFIGS = [
 
 SESSION_FIELDS = ['prolific_completion_url']
 
-PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','numGame',
+PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','treatmentThreshold1',
     'playerInSession','identity1','identity2','groupID',
     'groupIDRandom2','groupIDRandom4',
     'num_kleesRandom','klees_guessing_kleeRandom',
@@ -50,7 +50,7 @@ PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','numGame',
     'otherChagallsIdentity','otherPicassosIdentity',
     'riskGame1OtherChoice1','riskGame1OtherChoice2','riskGame1OtherChoice3',
     'riskGame2OtherChoice1','riskGame2OtherChoice2','riskGame2OtherChoice3',
-    'choiceNumForPayoff',
+    'choiceNumForPayoff','guess30','guess50','guess70',
     'PGOtherChoice1','PGOtherChoice2','PGOtherChoice3',
     'finished']
 

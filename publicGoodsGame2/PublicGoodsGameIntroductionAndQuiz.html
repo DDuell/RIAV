@@ -2,9 +2,9 @@
 {% load staticfiles otree %}
 
 {% block title %}
-Stage {{ player.numStage }}
+Stage {{ player.numStage }}: Instructions and Comprehsion Quiz
 <br><br>
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+{{ if player.treatment != 'noIdentity'  }}
 You are a {{ player.groupID }}
 {{ if player.groupID == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">
@@ -21,7 +21,7 @@ You are a {{ player.groupID }}
 
 {% block content %}
 
-{% include 'publicGoodsGameHtml/PublicGoodsGameIntroduction.html' %}
+{% include 'publicGoodsGameHtml/PublicGoodsGameIntroductionAndQuiz.html' %}
 
 <span align="right">
 {% next_button %}

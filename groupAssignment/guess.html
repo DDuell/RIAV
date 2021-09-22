@@ -2,7 +2,7 @@
 {% load staticfiles otree %}
 
 {% block title %}
-Stage 1
+Stage 1: Quiz
 <br><br>
 You are a {{ player.groupID }}
 {{ if player.groupID == 'Klee' }}
@@ -29,7 +29,7 @@ Your guess is <b>NOT</b> the final answer.
 
 {% formfield player.guess label='Please give your guess: Who is the painter of this painting?' %}
 
-{% formfield player.help label='Would you like to see the guesses of other members of your group in this study so far to help you choose your final answer?'%}
+{% formfield player.help label=help_label%}
 
 <br><br>
 <p>

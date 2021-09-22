@@ -11,9 +11,14 @@ Now, let's play the <strong>second game</strong>:<br><br>
 <img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4_reversed.jpg" %} style="float:center;height:300px;width:600px">
 {{ endif }}
 <br><br>
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
-You are playing this game with 
-a <strong>{{ player.otherGroupID1 }}</strong>
+
+{{ if player.treatment != 'noIdentity' }}
+<strong>You are playing this game with</strong>
+
+<table cellspacing="1" cellpadding="1">
+<tr>
+<td class="first">a <strong>{{ player.otherGroupID1 }}</strong></td>
+<td class="first">
 {{ if player.otherGroupID1 == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID1 == 'Kandinsky' }}
@@ -23,14 +28,16 @@ a <strong>{{ player.otherGroupID1 }}</strong>
 {{ elif player.otherGroupID1 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br><br>
-
-{{ if player.otherGroupID1 == player.otherGroupID2 }}
+</td>
+</tr>
+<tr>
+<td class="second">{{ if player.otherGroupID1 == player.otherGroupID2 }}
 another <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID1 != player.otherGroupID2 }}
 a <strong>{{ player.otherGroupID2 }}</strong>
 {{ endif }}
-{{ if player.otherGroupID2 == 'Klee' }}
+</td>
+<td class="second">{{ if player.otherGroupID2 == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID2 == 'Kandinsky' }}
 <img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
@@ -39,19 +46,23 @@ a <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID2 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br><br>
-
-{{ if player.otherGroupID1 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID2 }}
-and another <strong>{{ player.otherGroupID2 }}</strong>.
+</td>
+</tr>
+<tr>
+<td class="third">
+ {{ if player.otherGroupID1 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID2 }}
+and another <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
-and another <strong>{{ player.otherGroupID2 }}</strong>.
+and another <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID1 == player.otherGroupID2 and player.otherGroupID1 == player.otherGroupID3}}
-and yet another <strong>{{ player.otherGroupID3 }}</strong>.
+and yet another <strong>{{ player.otherGroupID3 }}</strong>
 {{ else }}
 and a <strong>{{ player.otherGroupID3 }}</strong>.
 {{ endif }}
-{{ if player.otherGroupID3 == 'Klee' }}
-<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
+</td>
+<td class="third">
+{{ if player.otherGroupID3 == 'Klee' }} 
+<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width:50px">
 {{ elif player.otherGroupID3 == 'Kandinsky' }}
 <img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID3 == 'Chagall' }}
@@ -59,14 +70,24 @@ and a <strong>{{ player.otherGroupID3 }}</strong>.
 {{ elif player.otherGroupID3 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br>
+</td>
+</tr>  
+</table>
 
 {{ else }}
-You are playing this game with 3 other players.
+You are playing this game with 3 other players
 {{ endif }}
 </strong>
 <br><br>
 </p>	
+
+{% if player.treatmentThreshold2 == 3 %}
+{% formfield player.belief2 label='What do you think, how likely is it that <strong>at least 2</strong> other players choose A?' %}
+{% else %}
+{% formfield player.belief2 label='What do you think, how likely is it that <strong>all</strong> other players choose A?' %}
+{% endif %}
+
+<br><br>
 
 {% formfield player.choice2 label='Please make your choice:' %}	
 

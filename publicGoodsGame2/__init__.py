@@ -10,7 +10,7 @@ class Constants(BaseConstants):
     name_in_url = 'publicGoodsGame2'
     players_per_group = None
     num_rounds = 1 
-    endowment = 10
+    endowment = 5
     multiplier = 2
     quizQuestion_correct = 5
 
@@ -58,7 +58,10 @@ class Player(BasePlayer):
 #******************************************************************************#
 # Public goods game introduction
 #*****************************************************************************#
-class PublicGoodsGameIntroduction(Page):
+class PublicGoodsGameIntroductionAndQuiz(Page):
+    form_model = 'player'
+    form_fields = ['quizQuestion']
+    
     @staticmethod
     def is_displayed(player: Player):
       player.orderOfApps = player.participant.orderOfApps
@@ -69,8 +72,7 @@ class PublicGoodsGameIntroduction(Page):
       player.treatment = player.participant.treatment
       player.numStage = player.participant.numStage
       
-      if (player.treatment != 'noIdentity' and
-          player.treatment != 'noIdentityLowThreshold'):
+      if player.treatment != 'noIdentity':
         player.groupID = player.participant.groupID    
         player.otherGroupID1 = player.participant.otherGroupID1
         player.otherGroupID2 = player.participant.otherGroupID2
@@ -79,17 +81,6 @@ class PublicGoodsGameIntroduction(Page):
         player.PGOtherChoice2 = player.participant.PGOtherChoice2
         player.PGOtherChoice3 = player.participant.PGOtherChoice3
       
-#*****************************************************************************#
-# Quiz
-#*****************************************************************************#
-class Quiz(Page):
-    form_model = 'player'
-    form_fields = ['quizQuestion']
-    
-    @staticmethod
-    def is_displayed(player: Player):
-      return player.orderOfApps==2 
-               
 #*****************************************************************************#
 # Quiz feedback
 #*****************************************************************************#
@@ -108,6 +99,12 @@ class Choice(Page):
     @staticmethod
     def is_displayed(player: Player):
       return player.orderOfApps==2
+    
+    @staticmethod 
+    def vars_for_template(player: Player):
+      return {
+        'choice_label':"How much do you want to share with the group? You can share nothing (=0 Points) up to the full amount of your endowment (={} Points)".format(Constants.endowment)
+      }
 
 #*****************************************************************************#
 # Results
@@ -121,18 +118,14 @@ class Results(Page):
     def vars_for_template(player: Player):
       players = player.subsession.get_players()
       playersDone = [p for p in players if p.choiceDone!=99]
-      if (player.participant.treatment!='noIdentity' and 
-        player.participant.treatment!='noIdentityLowThreshold'):
+      if player.participant.treatment!='noIdentity':
           klees = [p for p in playersDone if p.groupID == 'Klee']
           kandinskys = [p for p in playersDone if p.groupID == 'Kandinsky']
           chagalls = [p for p in playersDone if p.groupID == 'Chagall']
           picassos = [p for p in playersDone if p.groupID == 'Picasso']
       
       # No identity treatment
-      mu = Constants.endowment/2
-      sigma = Constants.endowment/10
-      if (player.participant.treatment=='noIdentity' or 
-        player.participant.treatment=='noIdentityLowThreshold'):
+      if player.participant.treatment=='noIdentity':
           if len(playersDone)>2:
             player.otherChoice1 = playersDone[-1].choice
             player.otherChoice2 = playersDone[-2].choice
@@ -231,8 +224,7 @@ class Results(Page):
 #*****************************************************************************#
                              
 page_sequence = [
-    PublicGoodsGameIntroduction,
-    Quiz,
+    PublicGoodsGameIntroductionAndQuiz,
     QuizFeedback,
     Choice,
     Results

@@ -11,7 +11,7 @@ class Constants(BaseConstants):
     name_in_url = 'painterQuiz'
     players_per_group = None
     num_rounds = 1  
-    painterQuiz_reward = 10
+    painterQuiz_reward = 5
     painterQuiz_answer = 0 # Kandinsky
     
 #******************************************************************************#
@@ -102,8 +102,7 @@ class identityQuestion(Page):
     
     @staticmethod
     def is_displayed(player: Player): 
-        return (player.participant.treatment != 'noIdentity' and
-          player.participant.treatment != 'noIdentityLowThreshold')
+        return player.participant.treatment != 'noIdentity'
           
     @staticmethod    
     def vars_for_template(player: Player):
@@ -152,7 +151,7 @@ class identityQuestion(Page):
               player.participant.otherPicassosIdentity,player.participant.identity)
           
           # Find closest identity match in treatment with 2 groups
-          if (player.treatment == 'identity' or player.treatment == 'identityLowThreshold'):
+          if player.treatment == 'identity':
             if player.matchRatioKlees > 50 and player.matchRatioKandinskys < 50:
                 player.participant.groupID = 'Klee'
             elif player.matchRatioKlees < 50 and player.matchRatioKandinskys > 50: 
@@ -161,7 +160,7 @@ class identityQuestion(Page):
                 player.participant.groupID = player.participant.groupIDRandom2
           
           # Find closest identity match in treatment with 4 groups     
-          if (player.treatment == 'identity4Groups' or player.treatment == 'identity4GroupsLowThreshold'):
+          if player.treatment == 'identity4Groups':
             if (player.matchRatioKlees > 50 and player.matchRatioKandinskys < 50
               and player.matchRatioChagalls < 50 and player.matchRatioPicassos < 50):
                 player.participant.groupID = 'Klee'
@@ -177,9 +176,9 @@ class identityQuestion(Page):
             else: 
                 player.participant.groupID = player.participant.groupIDRandom4
         else: 
-          if (player.treatment == 'identity' or player.treatment == 'identityLowThreshold'):
+          if player.treatment == 'identity':
             player.participant.groupID = player.participant.groupIDRandom2
-          elif (player.treatment == 'identity4Groups' or player.treatment == 'identity4GroupsLowThreshold'):
+          elif player.treatment == 'identity4Groups':
             player.participant.groupID = player.participant.groupIDRandom4
 
         player.groupID = player.participant.groupID
@@ -192,7 +191,7 @@ class identityQuestion(Page):
 class identityAnnouncement(Page):
     @staticmethod
     def is_displayed(player: Player): 
-        return (player.participant.treatment != 'noIdentity' and player.participant.treatment != 'noIdentityLowThreshold')
+        return player.participant.treatment != 'noIdentity'
           
 # ******************************************************************************************************************** #
 # Identity announcement 2
@@ -200,7 +199,7 @@ class identityAnnouncement(Page):
 class identityAnnouncement2(Page):
     @staticmethod
     def is_displayed(player: Player): 
-      return (player.participant.treatment != 'noIdentity' and player.participant.treatment != 'noIdentityLowThreshold')
+      return player.participant.treatment != 'noIdentity'
           
     @staticmethod    
     def vars_for_template(player: Player):
@@ -217,9 +216,15 @@ class guess(Page):
     
     @staticmethod
     def is_displayed(player: Player): 
-        return (player.participant.treatment != 'noIdentity' and
-          player.participant.treatment != 'noIdentityLowThreshold')
+        return player.participant.treatment != 'noIdentity'
     
+    @staticmethod    
+    def vars_for_template(player: Player):
+      return {
+            'help_label': 'Would you like to see the guesses of the other {}s in this study so far to help you choose your final answer?'.format(player.groupID)    
+        }       
+          
+      
 #*****************************************************************************#
 # Answer 
 #*****************************************************************************#
@@ -229,8 +234,7 @@ class answer(Page):
     
     @staticmethod
     def is_displayed(player: Player): 
-        return (player.participant.treatment != 'noIdentity' and
-          player.participant.treatment != 'noIdentityLowThreshold')
+        return player.participant.treatment != 'noIdentity'
     
     @staticmethod
     def vars_for_template(player: Player):  
@@ -305,8 +309,7 @@ class results(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return (player.participant.treatment != 'noIdentity' and
-          player.participant.treatment != 'noIdentityLowThreshold')
+        return player.participant.treatment != 'noIdentity'
        
     @staticmethod   
     def vars_for_template(player: Player):
@@ -344,14 +347,12 @@ class results(Page):
               player.painterQuiz_payoff = Constants.painterQuiz_reward
             elif player.correct_klees < num_klees_half:
               player.painterQuiz_payoff = 0
-          if (player.participant.treatment!='identity4Groups' and 
-            player.participant.treatment!='identity4GroupsLowThreshold'):
+          if player.participant.treatment!='identity4Groups':
             if player.correct_klees >= player.correct_kandinskys:
               player.painterQuiz_additionalPayoff = Constants.painterQuiz_reward
             else:
               player.painterQuiz_additionalPayoff = 0
-          elif(player.participant.treatment=='1' or
-            player.participant.treatment=='identity4GroupsLowThreshold'):   
+          elif(player.participant.treatment=='identity4Groups'):   
             if (player.correct_klees >= player.correct_kandinskys and
               player.correct_klees >= player.correct_chagalls and 
               player.correct_klees >= player.correct_picassos):
@@ -365,14 +366,12 @@ class results(Page):
               player.painterQuiz_payoff = Constants.painterQuiz_reward
             elif player.correct_kandinskys < num_kandinskys_half:
               player.painterQuiz_payoff = 0
-            if (player.participant.treatment!='identity4Groups' and 
-              player.participant.treatment!='identity4GroupsLowThreshold'):
+            if player.participant.treatment!='identity4Groups':
               if player.correct_kandinskys >= player.correct_klees:
                 player.painterQuiz_additionalPayoff = Constants.painterQuiz_reward
               else:
                 player.painterQuiz_additionalPayoff = 0
-            elif(player.participant.treatment=='identity4Groups' or
-              player.participant.treatment=='identity4GroupsLowThreshold'):   
+            elif player.participant.treatment=='identity4Groups':   
               if (player.correct_kandinskys >= player.correct_klees and
                 player.correct_kandinskys >= player.correct_chagalls and 
                 player.correct_kandinskys >= player.correct_picassos):
@@ -424,7 +423,6 @@ page_sequence = [
     identityAnnouncement,
     identityAnnouncement2,
     guess,
-    # help,
     answer,
     results
 ]

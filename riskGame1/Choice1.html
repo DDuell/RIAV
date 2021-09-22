@@ -1,9 +1,20 @@
 {% extends "global/Base.html" %}
 {% load staticfiles otree %}
 
+<style type="text/css">
+table {
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 0.5rem;
+  text-align: left;
+}
+</style>
+
 {% block title %}
-Stage {{ player.numStage }}
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+Stage {{ player.numStage }}: Decision 1
+{{ if player.treatment != 'noIdentity'  }}
 You are a {{ player.groupID }}
 {{ if player.groupID == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">

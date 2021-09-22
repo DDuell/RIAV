@@ -37,7 +37,20 @@ class Player(BasePlayer):
                                 choices=['Male', 'Female','Other'],
                                 verbose_name='What is your gender?',
                                 widget=widgets.RadioSelect())
+    
+    q_race = models.CharField(initial=None,
+                                choices=['White non-Hispanic', 
+                                'Black non-Hispanic','Hispanic','Other'],
+                                widget=widgets.RadioSelect())
 
+    q_education = models.CharField(initial=None,
+                                choices=['High school diploma or equivalent',
+                                'Some college but no degree',
+                                'Associate degree or equivalent',
+                                "Bachelor's degree",
+                                'Graduate degree',
+                                'Other'],
+                                widget=widgets.RadioSelect())
 
     q_groupID = models.CharField(initial=None,
       choices=['Klees', 'Kandinskys','Chagalls','Picassos','No group assigned'],
@@ -65,8 +78,8 @@ class Player(BasePlayer):
 #*****************************************************************************#
 class questions(Page):
   form_model = 'player'
-  form_fields = ['q_age','q_gender','q_groupID','q_groupClose','q_choices',
-      'q_whatAbout','q_clear']
+  form_fields = ['q_age','q_gender','q_race','q_education','q_groupID',
+    'q_groupClose','q_choices','q_whatAbout','q_clear']
   
   @staticmethod
   def vars_for_template(player: Player):

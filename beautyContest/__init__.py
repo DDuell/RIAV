@@ -10,7 +10,7 @@ class Constants(BaseConstants):
     name_in_url = 'beautyContest1'
     players_per_group = None
     num_rounds = 1 
-    prize = 10
+    prize = 5
 
 #******************************************************************************#
 # Subsession
@@ -33,7 +33,7 @@ class Player(BasePlayer):
   groupID = models.CharField()
   playerInSession = models.IntegerField()
   beautyContest_payoffs = models.IntegerField(initial = 0)
-  choice = models.FloatField()
+  choice = models.FloatField(min=0,max=100)
   choiceDone = models.IntegerField(initial=99)
   otherChoice1 = models.FloatField()
   otherChoice2 = models.FloatField()
@@ -45,21 +45,17 @@ class Player(BasePlayer):
 #******************************************************************************#
 # Pages
 #******************************************************************************#
-# Beauty contest introduction
+# Beauty contest introduction and choice
 #*****************************************************************************#
-class beautyContestIntroduction(Page):
+class beautyContestIntroductionAndChoice(Page):
+    form_model = 'player'
+    form_fields = ['choice']
+    
     @staticmethod
     def vars_for_template(player: Player):
       player.treatment = player.participant.treatment
       player.numStage = player.participant.numStage
       
-#*****************************************************************************#
-# Choice
-#*****************************************************************************#
-class Choice(Page):
-    form_model = 'player'
-    form_fields = ['choice']
-
 #*****************************************************************************#
 # Results
 #*****************************************************************************#
@@ -118,7 +114,6 @@ class Results(Page):
 #*****************************************************************************#
                              
 page_sequence = [
-    beautyContestIntroduction,
-    Choice,
+    beautyContestIntroductionAndChoice,
     Results
 ]

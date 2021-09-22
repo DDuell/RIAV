@@ -1,10 +1,10 @@
 {% extends "global/Base.html" %}
-{% load staticfiles otree_tags %}
+{% load staticfiles otree %}
 
 {% block title %}
-Stage {{ player.numStage }}: Comprehension Quiz
+Stage {{ player.numStage }}: Instructions and Comprehension Quiz
 <br><br>
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+{{ if player.treatment != 'noIdentity'  }}
 You are a {{ player.groupID }} 
 {{ if player.groupID == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">
@@ -21,8 +21,14 @@ You are a {{ player.groupID }}
 
 {% block content %}
 
-{% include 'publicGoodsGameHtml/Quiz.html' %}
+{% include 'publicGoodsGameHtml/PublicGoodsGameIntroductionAndQuiz.html' %}
 
+<span align="right">
 {% next_button %}
-
+</span>
+	
 {% endblock %}
+
+
+
+

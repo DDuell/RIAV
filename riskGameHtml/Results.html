@@ -12,9 +12,13 @@ Below is the version of the game that was randomly chosen for determining your e
 {{ endif }}
 <br><br>
   
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+{{ if player.treatment != 'noIdentity'  }}
 You played this game with 
-a <strong>{{ player.otherGroupID1 }}</strong> who chose <strong>{{ player.otherChoice1 }}</strong>
+
+<table cellspacing="1" cellpadding="1">
+<tr>
+<td class="first">a <strong>{{ player.otherGroupID1 }}</strong> who chose <strong>{{ player.otherChoice1 }}</strong></td>
+<td class="first">
 {{ if player.otherGroupID1 == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID1 == 'Kandinsky' }}
@@ -24,13 +28,18 @@ a <strong>{{ player.otherGroupID1 }}</strong> who chose <strong>{{ player.otherC
 {{ elif player.otherGroupID1 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br><br>
-
+</td>
+</tr>
+<tr>
+<td class="second">
 {{ if player.otherGroupID1 == player.otherGroupID2 }}
-another <strong>{{ player.otherGroupID2 }}</strong> who chose <strong>{{ player.otherChoice2 }}</strong>
+another <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID1 != player.otherGroupID2 }}
-a <strong>{{ player.otherGroupID2 }}</strong> who chose <strong>{{ player.otherChoice2 }}</strong>
+a <strong>{{ player.otherGroupID2 }}</strong>
 {{ endif }}
+who chose <strong>{{ player.otherChoice2 }}</strong>
+</td>
+<td class="second">
 {{ if player.otherGroupID2 == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID2 == 'Kandinsky' }}
@@ -40,17 +49,24 @@ a <strong>{{ player.otherGroupID2 }}</strong> who chose <strong>{{ player.otherC
 {{ elif player.otherGroupID2 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br><br>
-
-{{ if player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
-and another <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+</td>
+</tr>
+<tr>
+<td class="third">
+{{ if player.otherGroupID1 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID2 }}
+and another <strong>{{ player.otherGroupID2 }}</strong>
+{{ elif player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
+and another <strong>{{ player.otherGroupID2 }}</strong>
 {{ elif player.otherGroupID1 == player.otherGroupID2 and player.otherGroupID1 == player.otherGroupID3}}
-and yet another <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+and yet another <strong>{{ player.otherGroupID3 }}</strong>
 {{ else }}
-and a <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.otherChoice3 }}</strong>.
+and a <strong>{{ player.otherGroupID3 }}</strong>.
 {{ endif }}
-{{ if player.otherGroupID3 == 'Klee' }}
-<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width: 50px">
+</strong> who chose <strong>{{ player.otherChoice3 }}</strong>
+</td>
+<td class="third">
+{{ if player.otherGroupID3 == 'Klee' }} 
+<img src="{{ static 'groupAssignment/Klee_C.jpg' }}" style="float:right;height:50px;width:50px">
 {{ elif player.otherGroupID3 == 'Kandinsky' }}
 <img src="{{ static 'groupAssignment/Kandinsky_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ elif player.otherGroupID3 == 'Chagall' }}
@@ -58,19 +74,104 @@ and a <strong>{{ player.otherGroupID3 }}</strong> who chose <strong>{{ player.ot
 {{ elif player.otherGroupID3 == 'Picasso' }}
 <img src="{{ static 'groupAssignment/Picasso_C.jpg' }}" style="float:right;height:50px;width: 50px">
 {{ endif }}
-<br><br>
+</td>
+</tr>  
+</table>
 
 {{ else }}
 One player chose <strong>{{ player.otherChoice1 }}</strong>, <br><br>
 another player chose <strong>{{ player.otherChoice2 }}</strong>, <br><br>
 and yet another player chose <strong>{{ player.otherChoice3 }}</strong>.
-
 {{ endif }}
 <br><br>
-You chose <strong>{{ player.choiceForPayoff }}</strong>.
-<br><br>
 
-As a result, your earned <strong>{{ player.riskGame_payoffs }} Points</strong> in Stage {{ player.numStage }}.
+You chose <strong>{{ player.choiceForPayoff }}</strong>. As a result, your earned <strong>{{ player.riskGame_payoffs }} Points</strong> for your choice.
+<br><br>
+You answered that you thought that in <strong>{{ beliefForPayoffDisplay }}</strong> 
+{{ if player.treatmentThresholdForPayoff == 3 }}
+at least 2 other participants choose A.
+{{ else }}
+all other participants choose A.
+{{ endif }} 
+
+{{ if beliefForPayoffDisplay == '7 out of 10 times' }}
+We took your answer and ran a lottery where <i>that
+{{ if player.treatmentThresholdForPayoff == 3 }}
+at least 2 other participants choose A</i>
+{{ else }}
+all other participants choose A</i>
+{{ endif }} 
+is your guess 70% of the time and <i>that they do not</i> is your guess 30% of the time. 
+The lottery determined that the likelihood of 3 out of 10 resulted in the guess
+{{ if player.guess == 'AAA' }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that all other participants choose A.
+{{ else }}
+that at least 2 other participants choose A.
+{{ endif }}
+{{ else }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that NOT all other participants choose A.
+{{ else }}
+that NOT at least 2 other participants choose A.
+{{ endif }}
+{{ endif }}
+
+{{ elif beliefForPayoffDisplay == '5 out of 10 times' }}
+We took your answer and ran a lottery where <i>that
+{{ if player.treatmentThresholdForPayoff == 3 }}
+at least 2 other participants choose A</i>
+{{ else }}
+all other participants choose A</i>
+{{ endif }} 
+is your guess 50% of the time and <i>that they do not</i>  is your guess 50% of the time. 
+The lottery determined that the likelihood of 3 out of 10 resulted in the guess
+{{ if player.guess == 'AAA' }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that all other participants choose A.
+{{ else }}
+that at least 2 other participants choose A.
+{{ endif }}
+{{ else }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that NOT all other participants choose A.
+{{ else }}
+that NOT at least 2 other participants choose A.
+{{ endif }}
+{{ endif }}
+
+{{ elif beliefForPayoffDisplay == '3 out of 10 times' }}
+We took your answer and ran a lottery where <i>that
+{{ if player.treatmentThresholdForPayoff == 3 }}
+at least 2 other participants choose A</i>
+{{ else }}
+all other participants choose A</i>
+{{ endif }} 
+is your guess 30% of the time and <i>that they do not</i>  is your guess 70% of the time. 
+The lottery determined that the likelihood of 3 out of 10 resulted in the guess
+{{ if player.guess == 'AAA' }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that all other participants choose A.
+{{ else }}
+that at least 2 other participants choose A.
+{{ endif }}
+{{ else }}
+{{ if player.treatmentThresholdForPayoff == 4 }}
+that NOT all other participants choose A.
+{{ else }}
+that NOT at least 2 other participants choose A.
+{{ endif }}
+{{ endif }}
+{{ endif }}
+
+{{ if player.beliefElicitation_payoffs == 10 }}
+This guess is correct. As a result you earned another <strong>{{ player.beliefElicitation_payoffs }} Points</strong> for your guess.
+{{ else }}
+This guess is incorrect. As a result you did not earn more points for your guess.
+{{ endif }}
+
+<br><br>
+Your total earnings in Stage {{ player.numStage }} are <strong>{{ totalPayoffs }} Points</strong>.
 </p>
 
 <p>

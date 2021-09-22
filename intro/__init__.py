@@ -10,7 +10,8 @@ class Constants(BaseConstants):
     name_in_url = 'introduction'
     players_per_group = None
     num_rounds = 1  
-    endowment = 10
+    endowment = 5
+    painterQuiz_reward = 5
     multiplier = 2
     numPlayersConsidered = 20
     
@@ -48,25 +49,21 @@ class Demographics(Page):
 class experimentIntroduction(Page):
   @staticmethod
   def vars_for_template(player: Player):
-    player.treatment=random.choice(['noIdentity','identity',
-      'noIdentityLowThreshold','identityLowThreshold','identity4Groups',
-      'identity4GroupsLowThreshold'])
+    player.treatment=random.choice(['noIdentity','identity','identity4Groups'])
     player.participant.treatment = player.treatment
+    player.participant.treatmentThreshold1=random.choice([3,4])
     player.orderOfApps = random.randint(1,2)
     player.participant.orderOfApps = player.orderOfApps
     player.participant.numStage = 0
-    if (player.treatment == 'identity' or 
-      player.treatment == 'identityLowThreshold'):
+    if (player.treatment == 'identity'):
           player.otherGroupID1 = random.choice(['Klee','Kandinsky'])
           player.otherGroupID2 = random.choice(['Klee','Kandinsky'])
           player.otherGroupID3 = random.choice(['Klee','Kandinsky'])
-    elif (player.treatment == 'identity4Groups' or 
-      player.treatment == 'identity4GroupsLowThreshold'):
+    elif (player.treatment == 'identity4Groups'):
           player.otherGroupID1 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
           player.otherGroupID2 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
           player.otherGroupID3 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
-    if (player.treatment!='noIdentity' and 
-      player.treatment!='noIdentityLowThreshold'):
+    if (player.treatment!='noIdentity'):
           player.participant.otherGroupID1 = player.otherGroupID1
           player.participant.otherGroupID2 = player.otherGroupID2
           player.participant.otherGroupID3 = player.otherGroupID3  
@@ -92,8 +89,8 @@ class experimentIntroduction(Page):
       player.participant.chagalls_guessing_kleeRandom = random.randint(2,player.participant.num_chagallsRandom)
       player.participant.num_picassosRandom = random.randint(2,Constants.numPlayersConsidered)
       player.participant.picassos_guessing_kleeRandom = random.randint(2,player.participant.num_picassosRandom)
-      player.participant.painterQuiz_payoff = random.choice([0,10])
-      player.participant.painterQuiz_additionalPayoff = random.choice([0,10])
+      player.participant.painterQuiz_payoff = random.choice([0,Constants.painterQuiz_reward])
+      player.participant.painterQuiz_additionalPayoff = random.choice([0,Constants.painterQuiz_reward])
       player.participant.allA_payoffs1 = random.choice([15,10])
       player.participant.allA_payoffs2 = random.choice([15,10])
       player.participant.choiceNumForPayoff = random.choice([1,2])
@@ -106,7 +103,11 @@ class experimentIntroduction(Page):
       player.participant.riskGame2OtherChoice1 = random.choice(['A','B'])
       player.participant.riskGame2OtherChoice2 = random.choice(['A','B'])
       player.participant.riskGame2OtherChoice3 = random.choice(['A','B'])
-      player.participant.choiceNumForPayoff = random.choice([1,2])  
+      player.participant.guess30 = random.choice(['AAA','AAA','AAA','Not AAA',
+        'Not AAA','Not AAA','Not AAA','Not AAA','Not AAA','Not AAA'])
+      player.participant.guess50 = random.choice(['AAA','Not AAA'])
+      player.participant.guess70 = random.choice(['AAA','AAA','AAA','AAA','AAA',
+        'AAA','AAA','Not AAA','Not AAA','Not AAA'])
       player.participant.beautyOtherChoice1 = random.randint(15,60)
       player.participant.beautyOtherChoice2 = random.randint(15,60)
       player.participant.beautyOtherChoice3 = random.randint(15,60)

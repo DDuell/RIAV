@@ -6,6 +6,7 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+
 # ******************************************************************************************************************** #
 # *** CLASS INSTRUCTIONS *** #
 # ******************************************************************************************************************** #
@@ -24,7 +25,7 @@ class Instructions(Page):
             'num_boxes':            Constants.num_rows * Constants.num_cols,
             'num_nobomb':           Constants.num_rows * Constants.num_cols - 1,
             'box_value':            Constants.box_value,
-            'time_interval':        Constants.time_interval,
+            'time_interval':        Constants.time_interval
         }
 
 
@@ -61,7 +62,7 @@ class Decision(Page):
             'undoable':         Constants.undoable,
             'box_width':        Constants.box_width,
             'box_height':       Constants.box_height,
-            'time_interval':    Constants.time_interval,
+            'time_interval':    Constants.time_interval
         }
 
         return {
@@ -86,7 +87,7 @@ class Results(Page):
     def vars_for_template(self):
         total_payoff = sum([p.payoff for p in self.player.in_all_rounds()])
         self.player.participant.bombGame_payoffs = total_payoff
- 
+
         return {
             'player_in_all_rounds':   self.player.in_all_rounds(),
             'box_value':              Constants.box_value,
@@ -98,9 +99,9 @@ class Results(Page):
             'round_result':           self.player.round_result,
             'round_to_pay':           self.participant.vars['round_to_pay'],
             'payoff':                 self.player.payoff,
-            'total_payoff':           total_payoff,
+            'total_payoff':           total_payoff
         }
-        
+
     def before_next_page(self):
       self.player.participant.numStage = self.player.participant.numStage + 1
 

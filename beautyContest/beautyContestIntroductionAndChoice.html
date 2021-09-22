@@ -2,13 +2,13 @@
 {% load staticfiles otree %}
 
 {% block title %}
-Stage {{ player.numStage }}
+Stage {{ player.numStage }}: Instructions and Decision
 <hr>
 {% endblock %}
 
 {% block content %}
 
-{% include 'beautyContestHtml/beautyContestIntroduction.html' %}
+{% include 'beautyContestHtml/beautyContestIntroductionAndChoice.html' %}
 
 <span align="right">
 {% next_button %}

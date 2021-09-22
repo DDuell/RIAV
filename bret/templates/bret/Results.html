@@ -15,9 +15,8 @@
 {# *** TITLE *** #}
 {# ****************************************************************************************************************** #}
 {% block title %}
-<p align="left">
 Stage {{ player.numStage }}: Earnings
-</p>
+<hr>
 {% endblock %}
 
 
@@ -50,7 +49,7 @@ Stage {{ player.numStage }}: Earnings
                 {% blocktrans trimmed %}
                     Your collected boxes did not contain the bomb.<br/>
                     Thus, you receive {{ box_value }} for each of the {{ boxes_collected }} boxes
-                    you collected such that your payoff from this task amounts to <b>{{ payoff }}</b>.
+                    you collected such that your payoff from this task amounts to <b>{{ payoff }}</b>
                 {% endblocktrans %}
             {% endif %}
         </div>
@@ -103,12 +102,12 @@ Stage {{ player.numStage }}: Earnings
         {% if Constants.random_payoff %}
                 {% blocktrans trimmed %}
                     For your payment, round number {{ round_to_pay }} was randomly chosen. <br/>
-                    Thus, your final payoff in this task amounts to {{ total_payoff }}.
+                    Thus, your final payoff in this task amounts to {{ total_payoff }}
                 {% endblocktrans %}
         {% else %}
                 {% blocktrans trimmed %}
                     Your final payoff is determined by the sum of all payoffs per round
-                    such that you final payoff in this task amounts to {{ total_payoff }}.
+                    such that you final payoff in this task amounts to {{ total_payoff }}
                 {% endblocktrans %}
         {% endif %}
         </div>

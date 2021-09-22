@@ -47,7 +47,7 @@ Less than half of {{ player.groupID }}s in the study chose
 
 {% if player.painterQuiz_additionalPayoff > 0  %}
 At least as many {{ player.groupID }}s as members of 
-{{ if player.treatment == 'identity4Groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+{{ if player.treatment == 'identity4Groups' }} 
   each of the other groups 
 {{ else }} 
   the other group 
@@ -56,7 +56,7 @@ in the study so far gave the correct answer.
 {% endif %}
 
 {% if player.painterQuiz_additionalPayoff == 0  %}
-Fewer {{ player.groupID }}s as members of {{ if player.treatment == 'identity4groups' or player.treatment == 'identity4GroupsLowThreshold' }} 
+Fewer {{ player.groupID }}s as members of {{ if player.treatment == 'identity4groups'  }} 
   each of the other groups 
 {{ else }} 
   the other group 

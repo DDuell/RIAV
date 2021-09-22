@@ -2,9 +2,9 @@
 {% load staticfiles otree %}
 
 {% block title %}
-Stage {{ player.numStage }}
+Stage {{ player.numStage }}: Instructions
 <br><br>
-{{ if player.treatment != 'noIdentity' and player.treatment != 'noIdentityLowThreshold' }}
+{{ if player.treatment != 'noIdentity' }}
 You are a {{ player.groupID }} 
 {{ if player.groupID == 'Klee' }}
 <img src="{{ static 'groupAssignment/Klee_C.jpg'}}" style="height:50px; width = 50px">
