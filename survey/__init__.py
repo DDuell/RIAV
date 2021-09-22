@@ -86,12 +86,8 @@ class questions(Page):
     player.treatment = player.participant.treatment
     player.numStage = player.participant.numStage
     
-#******************************************************************************#
-# Final payoffs
-#*****************************************************************************#
-class finalPayoffs(Page):
-    @staticmethod
-    def vars_for_template(player: Player):
+  @staticmethod
+  def before_next_page(player: Player,timeout_happened):  
       exchange_rate = player.session.config['real_world_currency_per_point']
       participation_fee = player.session.config['participation_fee']
       if (player.treatment != 'noIdentity' and 
@@ -107,6 +103,15 @@ class finalPayoffs(Page):
           player.participant.beautyContest_payoffs +
           player.participant.bombGame_payoffs)*exchange_rate)
       player.totalEarnings = cu(player.gameEarnings + participation_fee)
+      
+      
+#******************************************************************************#
+# Final payoffs
+#*****************************************************************************#
+class finalPayoffs(Page):
+    @staticmethod
+    def vars_for_template(player: Player):
+      participation_fee = player.session.config['participation_fee']
       return {
         'participation_fee':participation_fee
       }
