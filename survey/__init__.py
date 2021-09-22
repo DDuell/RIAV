@@ -70,6 +70,8 @@ class Player(BasePlayer):
     q_clear = models.TextField(verbose_name='Where the instructions clear? If not, which part of the instructions was not clear?')
     gameEarnings = models.CurrencyField(initial = 0)
     totalEarnings = models.CurrencyField(initial = 0)
+    finished = models.CharField()
+    label = models.CharField()
   
 #******************************************************************************#
 # Pages
@@ -103,6 +105,7 @@ class questions(Page):
           player.participant.beautyContest_payoffs +
           player.participant.bombGame_payoffs)*exchange_rate)
       player.totalEarnings = cu(player.gameEarnings + participation_fee)
+      player.payoff = player.gameEarnings
       
       
 #******************************************************************************#
@@ -119,6 +122,8 @@ class finalPayoffs(Page):
     @staticmethod
     def before_next_page(player: Player,timeout_happened):  
       player.participant.finished = True 
+      player.finished = player.participant.finished
+      player.label = participant.label
 
 page_sequence = [
     questions,
