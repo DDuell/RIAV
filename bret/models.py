@@ -45,13 +45,13 @@ class Player(BasePlayer):
     # --- set round results and player's payoff
     # ------------------------------------------------------------------------------------------------------------------
     pay_this_round = models.BooleanField()
-    round_result = models.CurrencyField()
+    round_result = models.FloatField()
 
     def set_payoff(self):
 
         # determine round_result as (potential) payoff per round
         if self.bomb:
-            self.round_result = c(0)
+            self.round_result = 0
         else:
             self.round_result = self.boxes_collected * Constants.box_value
 
@@ -66,7 +66,7 @@ class Player(BasePlayer):
                 self.payoff = self.round_result
             else:
                 self.pay_this_round = False
-                self.payoff = c(0)
+                self.payoff = 0
 
         # set payoffs to round_result if <random_payoff = False>
         else:

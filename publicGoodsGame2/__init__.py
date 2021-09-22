@@ -12,7 +12,7 @@ class Constants(BaseConstants):
     num_rounds = 1 
     endowment = 5
     multiplier = 2
-    quizQuestion_correct = 5
+    quizQuestion_correct = 8
 
 #******************************************************************************#
 # Subsession

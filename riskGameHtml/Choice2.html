@@ -1,19 +1,6 @@
 <p>
-Now, let's play the <strong>second game</strong>:<br><br>
-
-{{ if player.treatmentThreshold2 == 3 and player.allA_payoffs2 == 15 }}
-<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3.jpg" %} style="float:center;height:300px;width:600px">
-{{ elif player.treatmentThreshold2 == 4 and player.allA_payoffs2 == 15 }}
-<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4.jpg" %} style="float:center;height:300px;width:600px">
-{{ elif player.treatmentThreshold2 == 3 and player.allA_payoffs2 == 10 }}
-<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3_reversed.jpg" %} style="float:center;height:300px;width:600px">
-{{ elif player.treatmentThreshold2 == 4 and player.allA_payoffs2 == 10 }}
-<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4_reversed.jpg" %} style="float:center;height:300px;width:600px">
-{{ endif }}
-<br><br>
-
 {{ if player.treatment != 'noIdentity' }}
-<strong>You are playing this game with</strong>
+You are playing with
 
 <table cellspacing="1" cellpadding="1">
 <tr>
@@ -77,9 +64,24 @@ and a <strong>{{ player.otherGroupID3 }}</strong>.
 {{ else }}
 You are playing this game with 3 other players
 {{ endif }}
-</strong>
 <br><br>
+
+Let's play the <strong>second game</strong>:<br><br>
+
+{{ if player.treatmentThreshold2 == 3 and player.allA_payoffs2 == 15 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThreshold2 == 4 and player.allA_payoffs2 == 15 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThreshold2 == 3 and player.allA_payoffs2 == 10 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth3_reversed.jpg" %} style="float:center;height:300px;width:600px">
+{{ elif player.treatmentThreshold2 == 4 and player.allA_payoffs2 == 10 }}
+<img src={% static "riskGame1/strategicUncertainty_payoffTable_ABth4_reversed.jpg" %} style="float:center;height:300px;width:600px">
+{{ endif }}
 </p>	
+<br><br>
+
+{% formfield player.choice2 label='Please make <strong>your</strong> choice between option A and B:' %}	
+<br><br>
 
 {% if player.treatmentThreshold2 == 3 %}
 {% formfield player.belief2 label='What do you think, how likely is it that <strong>at least 2</strong> other players choose A?' %}
@@ -87,13 +89,40 @@ You are playing this game with 3 other players
 {% formfield player.belief2 label='What do you think, how likely is it that <strong>all</strong> other players choose A?' %}
 {% endif %}
 
+We will take your answer to this question as <strong>your guess of what will happen</strong>:
+<ul>
+<li>If you answer "10 out of 10 times", your are telling us that you guess is 
+{% if player.treatmentThreshold2 == 3 %}
+"at least 2 other participants choose A."
+{% else %}
+"all other participants choose A."
+{% endif %}
+</li>
+<li>If you answer "0 out of 10 times", your are telling us that your guess is
+{% if player.treatmentThreshold2 == 3 %}
+"less than 2 other participants choose A."
+{% else %}
+"not all other participants choose A."
+{% endif %}
+</li>
+<li> If you answer "7 out of 10 times", you are telling us that you think 70% of the time {% if player.treatmentThreshold2 == 3 %}
+"at least 2 other participants choose A"
+{% else %}
+"all other participants choose A"
+{% endif %}
+while in 30% of the time, they do not. 
+To determine your guess in this case, we would run a <strong>lottery</strong> and take {% if player.treatmentThreshold2 == 3 %}
+"at least 2 other participants choose A"
+{% else %}
+"all other participants choose A"
+{% endif %}
+as your guess 70% of the time but take "that they do not" as your guess 30% of the time. 
+<br>
+If you answer "5 out of 10 times" or "3 out of 10 times", we determine your guess in similar fashion only adjusting for the different odds you are giving us. 
+</ul>
+
+Once we determined your guess about how the other participants will behave, we will evalute whether it matches what actually happened. If it does and you guessed well, you will earn <strong>{{ Constants.beliefElicitation_reward }} additional points</strong>; otherwise you receive no additional points. 
 <br><br>
-
-{% formfield player.choice2 label='Please make your choice:' %}	
-
-
-
-
 
 
 

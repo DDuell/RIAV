@@ -4,51 +4,17 @@ In Stage {{ player.participant.numStage }} of the study, you are going to play <
 
 You can <strong>earn additional points</strong> from playing these games <strong>in two ways</strong>: 
 <ol>
-<li> <strong>Based on yours and the other 3 participants' choices:</strong> On the screen where we ask you to tell us which choice you would make, we show you for each game how much points you would earn given your choices and the choices of the other 3 participants. 
+<li> <strong>Based on yours and the other 3 participants' choices:</strong> On the screen where we ask you to tell us which choice you would make, we show you for each game how many points you would earn given your choice and the choices of the other 3 participants. 
 <br><br>
 </li>
-<li> <strong>Based on whether you correctly guessed the other 3 participants' choices:</strong>
-Before you will make your choice between option A and B, we will also ask you <i>"how likely do you think it is that   
-{% if player.treatmentThreshold1 == 3 %}
-at least 2 other participants choose A?"</i>
-{% else %}
-all other participants choose A?"</i>
-{% endif %}
-Your answer options for this question are: 
-<ul>
-<li> "10 out of 10 times" (Always)</li> 
-<li> "7 out of 10 times" (Likely)</li> 
-<li> "5 out of 10 times" (Neither likely nor unlikely)</li>
-<li> "3 out of 7 times" (Unlikely)</li>
-<li> "0 out of 10 times" (Never)</li> 
-<br>
-</ul>
-We will take your answer here as your guess what will happen. For example, if you would say "10 out of 10 times", your are telling us that you are sure 
-{% if player.treatmentThreshold1 == 3 %}
-<i>at least 2 other participants choose A.</i>
-{% else %}
-<i>all other participants choose A.</i>
-{% endif %}
-But if you would say "7 out of 10 times", you are telling us that you think 70% of the time {% if player.treatmentThreshold1 == 3 %}
-<i>at least 2 other participants choose A</i>
-{% else %}
-<i>all other participants choose A</i>
-{% endif %}
-while in 30% of the time, they do not. 
-In this case, we run a <strong>lottery</strong> and take {% if player.treatmentThreshold1 == 3 %}
-<i>at least 2 other participants choose A</i>
-{% else %}
-<i>all other participants choose A</i>
-{% endif %}
-as your guess 70% of the time but take <i>that they do not</i> as your guess 30% of the time. 
-<br><br>
-If you guess correctly, you will receive <strong>{{ Constants.beliefElicitation_reward }} additional points</strong>; otherwise you receive no additional points. 
+<li> <strong>Based on whether you correctly guessed the other 3 participants' choices</strong>
 </li>
 </ol>
-Once you have made your choices in each of the two games, we will choose one of them randomly and we compute earned points for Stage {{ player.numStage }} for all participants based on their choices. 
+
+Once you have made your choices in each of the two games, we will choose one of the games randomly and compute the earned points for Stage {{ player.numStage }} for all participants based on their choices. 
 <br><br>
 
-Once you click 'Next', we wil ask you a few questions so you can see how well you understood the rules. You will <strong>not</strong> earn additional points for answering these <strong>comprehension</strong> questions. 	
+When you click 'Next', we will ask you a few questions so you can see how well you understand the rules. You will <strong>not</strong> earn additional points for answering these <strong>comprehension</strong> questions. 	
 </p>
 
 

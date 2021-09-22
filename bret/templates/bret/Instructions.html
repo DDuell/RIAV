@@ -37,31 +37,30 @@ You are now entering Stage {{ player.numStage }} of the experiment. In this stag
         <p>
             {% blocktrans trimmed %}
                 As soon as you start the task by hitting the 'Start' button,
-                one of the boxes is collected per second, starting from the top-left corner.
-                Once collected, the box marked by a tick symbol.
-                For each box collected you earn {{ box_value }}.
+                one of the boxes is collected for you every second, starting from the top-left corner.
+                Once collected, the space is marked by a check mark.
+                For each box collected you earn <strong>{{ box_value }} Points</strong>.
             {% endblocktrans %}
         </p>
         <p>
             {% blocktrans trimmed %}
-                Behind one of the boxes hides a bomb that destroys everything that has been collected.
-                The remaining {{ num_nobomb }} boxes are worth {{ box_value }} each.
+                Behind one of the boxes hides a bomb that, if collected, will destroy everything that has been collected.
                 You do not know where the bomb is located.
                 You only know that the bomb can be in any place with equal probability.
             {% endblocktrans %}
         </p>
         <p>
             {% blocktrans trimmed %}
-                Your task is to choose when to stop the collecting process. You do so by hitting 'Stop' at any time.
-                If you collect the box where the bomb is located, the bomb will explode and you will earn zero.
-                If you stop before collecting the bomb, you gain the amount accumulated that far.
+Your task is to choose when to stop the collecting process. You do so by hitting 'Stop' at any time.
+If you collect the box where the bomb is located, the bomb will explode and you will earn zero.
+If you stop before collecting the bomb, you will get {{ box_value }} Points for each box collected. 
             {% endblocktrans %}
         </p>
         <p>
             {% blocktrans trimmed %}
-                At the end of the task boxes are toggled by hitting the 'Solve' button.
-                A dollar sign or a fire symbol (for the bomb) will be shown on each of your collected boxes.
-            {% endblocktrans %}
+At the end of the task, the content of the boxes is revealed by hitting the 'Solve' button.
+A dollar sign or a fire symbol (for the bomb) will be shown on each of your collected boxes.
+{% endblocktrans %}
         </p>
 
     </div>

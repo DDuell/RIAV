@@ -48,8 +48,8 @@ Stage {{ player.numStage }}: Earnings
             {% else %}
                 {% blocktrans trimmed %}
                     Your collected boxes did not contain the bomb.<br/>
-                    Thus, you receive {{ box_value }} for each of the {{ boxes_collected }} boxes
-                    you collected such that your payoff from this task amounts to <b>{{ payoff }}</b>
+                    Thus, you receive {{ box_value }} Points for each of the {{ boxes_collected }} boxes
+                    you collected such that your earnings from Stage {{ player.numStage }} amounts to <b>{{ total_payoff }} Points</b>
                 {% endblocktrans %}
             {% endif %}
         </div>
