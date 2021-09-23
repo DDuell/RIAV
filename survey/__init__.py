@@ -108,7 +108,6 @@ class questions(Page):
       player.payoff = player.gameEarnings
       player.participant.finished = True 
       player.finished = 'True'
-      player.label = participant.label
       
 #******************************************************************************#
 # Final payoffs
