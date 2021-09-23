@@ -2,7 +2,7 @@ from os import environ
 
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point= 0.1,
-    participation_fee= 2.50,
+    participation_fee= 1.50,
     num_bots= 12,
     doc= "strategicUncertainty"
     )
