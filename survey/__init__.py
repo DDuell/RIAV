@@ -107,7 +107,7 @@ class questions(Page):
       player.totalEarnings = cu(player.gameEarnings + participation_fee)
       player.payoff = player.gameEarnings
       player.participant.finished = True 
-      player.finished = player.participant.finished
+      player.finished = 'True'
       player.label = participant.label
       
 #******************************************************************************#
