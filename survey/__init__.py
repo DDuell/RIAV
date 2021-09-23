@@ -106,7 +106,9 @@ class questions(Page):
           player.participant.bombGame_payoffs)*exchange_rate)
       player.totalEarnings = cu(player.gameEarnings + participation_fee)
       player.payoff = player.gameEarnings
-      
+      player.participant.finished = True 
+      player.finished = player.participant.finished
+      player.label = participant.label
       
 #******************************************************************************#
 # Final payoffs
@@ -118,12 +120,6 @@ class finalPayoffs(Page):
       return {
         'participation_fee':participation_fee
       }
-      
-    @staticmethod
-    def before_next_page(player: Player,timeout_happened):  
-      player.participant.finished = True 
-      player.finished = player.participant.finished
-      player.label = participant.label
 
 page_sequence = [
     questions,
