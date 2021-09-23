@@ -22,7 +22,7 @@ SESSION_CONFIGS = [
             'bret',
             'survey'
             ],
-        num_demo_participants=3,
+        num_demo_participants=60,
     )
     # ,
     # dict(

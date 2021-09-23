@@ -113,8 +113,5 @@ class experimentIntroduction(Page):
       player.participant.beautyOtherChoice1 = random.randint(15,60)
       player.participant.beautyOtherChoice2 = random.randint(15,60)
       player.participant.beautyOtherChoice3 = random.randint(15,60)
-      players = player.subsession.get_players() 
-      for p in players: 
-        p.participant.groupID = 'Not yet assigned'
       
 page_sequence = [experimentIntroduction]    
