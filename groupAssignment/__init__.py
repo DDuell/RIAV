@@ -180,7 +180,15 @@ class identityQuestion(Page):
             player.participant.groupID = player.participant.groupIDRandom2
           elif player.treatment == 'identity4Groups':
             player.participant.groupID = player.participant.groupIDRandom4
-
+        
+        if player.participant.groupID=='Not assigned yet':
+          if player.treatment=='identity':
+            player.participant.groupID=player.participant.groupIDRandom2
+          elif player.treatment == 'identity4Groups':
+            player.participant.groupID=player.participant.groupIDRandom4
+        else: 
+          player.participant.groupID=player.participant.groupID
+          
         player.groupID = player.participant.groupID
         player.participant.identity1 = player.identity1
         player.participant.identity2 = player.identity2
@@ -239,7 +247,7 @@ class answer(Page):
     @staticmethod
     def vars_for_template(player: Player):  
         players = player.subsession.get_players()
-        playersGuessDone=[p for p in players if p.guess==99]
+        playersGuessDone=[p for p in players if p.guess!=99]
         if player.playerInSession > 1:
           klees = [p for p in playersGuessDone if p.groupID == 'Klee']
           kandinskys = [p for p in playersGuessDone if p.groupID == 'Kandinsky']
@@ -253,7 +261,7 @@ class answer(Page):
           else:
             player.num_klees = player.participant.num_kleesRandom
             player.klees_guessing_klee = player.participant.klees_guessing_kleeRandom
-            player.klees_guessing_kandinsky = player.num_klees-player.klees_guessing_klee
+            player.klees_guessing_kandinsky = player.num_klees-player.participant.klees_guessing_kleeRandom
             
           if len(kandinskys) > 1:    
             player.num_kandinskys = len(kandinskys)
@@ -262,7 +270,7 @@ class answer(Page):
           else:
             player.num_kandinskys = player.participant.num_kandinskysRandom
             player.kandinskys_guessing_klee = player.participant.kandinskys_guessing_kleeRandom
-            player.kandinskys_guessing_kandinsky = player.num_kandinskys-player.klees_guessing_klee 
+            player.kandinskys_guessing_kandinsky = player.num_kandinskys-player.participant.kandinskys_guessing_kleeRandom 
             
           if len(chagalls) > 1:    
             player.num_chagalls = len(chagalls)
@@ -271,7 +279,7 @@ class answer(Page):
           else:
             player.num_chagalls = player.participant.num_chagallsRandom
             player.chagalls_guessing_klee =  player.participant.chagalls_guessing_kleeRandom
-            player.chagalls_guessing_kandinsky = player.num_chagalls-player.klees_guessing_klee
+            player.chagalls_guessing_kandinsky = player.num_chagalls-player.participant.chagalls_guessing_kleeRandom
             
           if len(picassos) > 1:    
             player.num_picassos = len(picassos)
@@ -280,7 +288,7 @@ class answer(Page):
           else:
             player.num_picassos = player.participant.num_picassosRandom 
             player.picassos_guessing_klee = player.participant.picassos_guessing_kleeRandom
-            player.picassos_guessing_kandinsky = player.num_picassos-player.klees_guessing_klee     
+            player.picassos_guessing_kandinsky = player.num_picassos-player.participant.picassos_guessing_kleeRandom     
         
           if player.groupID == 'Klee':
             player.percentage_klee = (player.klees_guessing_klee/player.num_klees)*100

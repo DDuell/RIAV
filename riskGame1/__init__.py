@@ -91,11 +91,6 @@ class Player(BasePlayer):
 class RiskGameIntroduction(Page):
     @staticmethod
     def is_displayed(player: Player):
-      player.orderOfApps = player.participant.orderOfApps
-      return player.orderOfApps==1 
-    
-    @staticmethod
-    def vars_for_template(player: Player):
       player.treatment = player.participant.treatment
       player.treatmentThreshold1 = player.participant.treatmentThreshold1
       player.numStage = player.participant.numStage
@@ -107,7 +102,10 @@ class RiskGameIntroduction(Page):
         player.otherGroupID1 = player.participant.otherGroupID1
         player.otherGroupID2 = player.participant.otherGroupID2
         player.otherGroupID3 = player.participant.otherGroupID3
-      
+        
+      player.orderOfApps = player.participant.orderOfApps
+      return player.orderOfApps==1 
+
 #*****************************************************************************#
 # Quiz
 #*****************************************************************************#

@@ -64,11 +64,6 @@ class PublicGoodsGameIntroductionAndQuiz(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-      player.orderOfApps = player.participant.orderOfApps
-      return player.orderOfApps==1
-    
-    @staticmethod
-    def vars_for_template(player: Player):
       player.treatment = player.participant.treatment
       player.numStage = player.participant.numStage
       
@@ -80,6 +75,9 @@ class PublicGoodsGameIntroductionAndQuiz(Page):
         player.PGOtherChoice1 = player.participant.PGOtherChoice1
         player.PGOtherChoice2 = player.participant.PGOtherChoice2
         player.PGOtherChoice3 = player.participant.PGOtherChoice3
+        
+      player.orderOfApps = player.participant.orderOfApps
+      return player.orderOfApps==1
  
 #*****************************************************************************#
 # Quiz feedback

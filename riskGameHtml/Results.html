@@ -54,9 +54,9 @@ who chose <strong>{{ player.otherChoice2 }}</strong>
 <tr>
 <td class="third">
 {{ if player.otherGroupID1 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID2 }}
-and another <strong>{{ player.otherGroupID2 }}</strong>
+and another <strong>{{ player.otherGroupID3 }}</strong>
 {{ elif player.otherGroupID2 == player.otherGroupID3 and player.otherGroupID1 != player.otherGroupID3 }}
-and another <strong>{{ player.otherGroupID2 }}</strong>
+and another <strong>{{ player.otherGroupID3 }}</strong>
 {{ elif player.otherGroupID1 == player.otherGroupID2 and player.otherGroupID1 == player.otherGroupID3}}
 and yet another <strong>{{ player.otherGroupID3 }}</strong>
 {{ else }}
