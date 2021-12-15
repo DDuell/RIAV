@@ -152,12 +152,12 @@ class identityQuestion(Page):
           
           # Find closest identity match in treatment with 2 groups
           if player.treatment == 'identity':
-            if player.matchRatioKlees > 50 and player.matchRatioKandinskys < 50:
+            if player.matchRatioKlees >= 30 and player.matchRatioKandinskys < 30:
                 player.participant.groupID = 'Klee'
-            elif player.matchRatioKlees < 50 and player.matchRatioKandinskys > 50: 
-                player.participant.groupID = 'Kandinsky'
-            else: 
-                player.participant.groupID = player.participant.groupIDRandom2
+            elif player.matchRatioKandinskys >= 30 and player.matchRatioKlees < 30:
+                player.participant.groupID = 'Kandinsky'    
+            else:
+              player.participant.groupID = player.participant.groupIDRandom2
           
           # Find closest identity match in treatment with 4 groups     
           if player.treatment == 'identity4Groups':
