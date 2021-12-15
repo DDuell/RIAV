@@ -375,9 +375,9 @@ class Results(Page):
       if player.beliefForPayoff=='10 out of 10 times (Always)':
         player.guess = 'AAA'
       elif player.beliefForPayoff=='7 out of 10 times (Likely)':
-        player.guess = player.participant.guess50
-      elif player.beliefForPayoff=='5 out of 10 times (Neither likely nor unlikely)':
         player.guess = player.participant.guess70
+      elif player.beliefForPayoff=='5 out of 10 times (Neither likely nor unlikely)':
+        player.guess = player.participant.guess50
       elif player.beliefForPayoff=='3 out of 10 times (Unlikely)':
         player.guess = player.participant.guess30
       else:
