@@ -85,7 +85,7 @@ class Results(Page):
 
     # variables for use in template
     def vars_for_template(self):
-        total_payoff = self.player.boxes_collected*Constants.box_value
+        total_payoff = round(self.player.boxes_collected*Constants.box_value,1)
         self.player.participant.bombGame_payoffs = total_payoff
 
         return {
