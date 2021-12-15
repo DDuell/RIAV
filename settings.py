@@ -34,7 +34,8 @@ SESSION_FIELDS = ['prolific_completion_url']
 
 PARTICIPANT_FIELDS = ['orderOfApps','treatment','numStage','treatmentThreshold1',
     'playerInSession','identity1','identity2','groupID',
-    'groupIDRandom2','groupIDRandom4',
+    'groupIDRandom2','groupIDRandom4','groupCompositionRandomNumber',
+    'groupCompositionRandomNumber_1',
     'num_kleesRandom','klees_guessing_kleeRandom',
     'num_kandinskysRandom','kandinskys_guessing_kleeRandom',
     'num_chagallsRandom','chagalls_guessing_kleeRandom',

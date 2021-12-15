@@ -50,25 +50,16 @@ class experimentIntroduction(Page):
   @staticmethod
   def vars_for_template(player: Player):
     #player.treatment=random.choice(['noIdentity','identity','identity4Groups'])
-    player.treatment=random.choice(['noIdentity','identity','identity',
-      'identity','identity','identity'])
+    player.treatment=random.choice(['noIdentity','identity','identity','identity'])
     player.participant.treatment = player.treatment
     player.participant.treatmentThreshold1=random.choice([3,4])
-    player.orderOfApps = random.randint(1,2)
+    player.orderOfApps = random.choice([1,1,1,2])
     player.participant.orderOfApps = player.orderOfApps
     player.participant.numStage = 0
-    if (player.treatment == 'identity'):
+    if (player.treatment == 'noIdentity'):
           player.otherGroupID1 = random.choice(['Klee','Kandinsky'])
           player.otherGroupID2 = random.choice(['Klee','Kandinsky'])
           player.otherGroupID3 = random.choice(['Klee','Kandinsky'])
-    elif (player.treatment == 'identity4Groups'):
-          player.otherGroupID1 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
-          player.otherGroupID2 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
-          player.otherGroupID3 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
-    if (player.treatment!='noIdentity'):
-          player.participant.otherGroupID1 = player.otherGroupID1
-          player.participant.otherGroupID2 = player.otherGroupID2
-          player.participant.otherGroupID3 = player.otherGroupID3  
     player.participant.otherKleesIdentity = ['']
     player.participant.otherKandinskysIdentity = ['']
     player.participant.otherChagallsIdentity = ['']
@@ -83,6 +74,8 @@ class experimentIntroduction(Page):
       player.participant.numStage = player.participant.numStage + 1
       player.participant.groupIDRandom2 = random.choice(['Klee','Kandinsky'])
       player.participant.groupIDRandom4 = random.choice(['Klee','Kandinsky','Chagall','Picasso'])
+      player.participant.groupCompositionRandomNumber = random.randint(0,100)
+      player.participant.groupCompositionRandomNumber_1 = random.randint(1,3)
       player.participant.num_kleesRandom = random.randint(2,Constants.numPlayersConsidered)
       player.participant.klees_guessing_kleeRandom = random.randint(2,player.participant.num_kleesRandom)
       player.participant.num_kandinskysRandom = random.randint(2,Constants.numPlayersConsidered)

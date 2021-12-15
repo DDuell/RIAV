@@ -423,6 +423,95 @@ class results(Page):
     @staticmethod
     def before_next_page(player: Player,timeout_happened):
       player.participant.numStage = player.participant.numStage + 1
+      if (player.treatment == 'identity'):
+        if (player.groupID == 'Klee'):
+          if(player.participant.groupCompositionRandomNumber<=35):
+            player.otherGroupID1 = 'Kandinsky'
+            player.otherGroupID2 = 'Kandinsky'
+            player.otherGroupID3 = 'Kandinsky'
+          elif(player.participant.groupCompositionRandomNumber>35 and 
+            player.participant.groupCompositionRandomNumber<=44):
+            if(player.participant.groupCompositionRandomNumber_1==1):
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Klee'
+            elif(player.participant.groupCompositionRandomNumber_1==2):
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Kandinsky'
+            else: 
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Kandinsky'
+          elif(player.participant.groupCompositionRandomNumber>44 and 
+            player.participant.groupCompositionRandomNumber<=65):
+            if(player.participant.groupCompositionRandomNumber_1==1):
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Klee'
+            elif(player.participant.groupCompositionRandomNumber_1==2):
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Kandinsky'
+            else: 
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Klee'  
+          else: 
+            player.otherGroupID1 = 'Klee'
+            player.otherGroupID2 = 'Klee'
+            player.otherGroupID3 = 'Klee'
+      
+        else:
+          if(player.participant.groupCompositionRandomNumber<=35):
+            player.otherGroupID1 = 'Klee'
+            player.otherGroupID2 = 'Klee'
+            player.otherGroupID3 = 'Klee'
+          elif(player.participant.groupCompositionRandomNumber>35 and 
+            player.participant.groupCompositionRandomNumber<=44):
+            if(player.participant.groupCompositionRandomNumber_1==1):
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Kandinsky'
+            elif(player.participant.groupCompositionRandomNumber_1==2):
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Klee'
+            else: 
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Klee'
+          elif(player.participant.groupCompositionRandomNumber>44 and 
+            player.participant.groupCompositionRandomNumber<=65):
+            if(player.participant.groupCompositionRandomNumber_1==1):
+              player.otherGroupID1 = 'Klee'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Kandinsky'
+            elif(player.participant.groupCompositionRandomNumber_1==2):
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Klee'
+              player.otherGroupID3 = 'Kandinsky'
+            else: 
+              player.otherGroupID1 = 'Kandinsky'
+              player.otherGroupID2 = 'Kandinsky'
+              player.otherGroupID3 = 'Klee'  
+          else: 
+            player.otherGroupID1 = 'Klee'
+            player.otherGroupID2 = 'Klee'
+            player.otherGroupID3 = 'Klee'  
+          
+      elif (player.treatment == 'identity4Groups'):
+          player.otherGroupID1 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
+          player.otherGroupID2 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
+          player.otherGroupID3 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
+      if (player.treatment!='noIdentity'):
+          player.participant.otherGroupID1 = player.otherGroupID1
+          player.participant.otherGroupID2 = player.otherGroupID2
+          player.participant.otherGroupID3 = player.otherGroupID3  
+      player.participant.otherKleesIdentity = ['']
+      player.participant.otherKandinskysIdentity = ['']
+      player.participant.otherChagallsIdentity = ['']
+      player.participant.otherPicassosIdentity = ['']
 
 #*****************************************************************************#
 #*****************************************************************************#
