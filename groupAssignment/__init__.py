@@ -496,9 +496,9 @@ class results(Page):
               player.otherGroupID2 = 'Kandinsky'
               player.otherGroupID3 = 'Klee'  
           else: 
-            player.otherGroupID1 = 'Klee'
-            player.otherGroupID2 = 'Klee'
-            player.otherGroupID3 = 'Klee'  
+            player.otherGroupID1 = 'Kandinsky'
+            player.otherGroupID2 = 'Kandinsky'
+            player.otherGroupID3 = 'Kandinsky'  
           
       elif (player.treatment == 'identity4Groups'):
           player.otherGroupID1 = random.choice(['Klee','Kandinsky','Picasso','Chagall'])
