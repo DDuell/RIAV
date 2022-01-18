@@ -50,7 +50,7 @@ class experimentIntroduction(Page):
   @staticmethod
   def vars_for_template(player: Player):
     #player.treatment=random.choice(['noIdentity','identity','identity4Groups'])
-    player.treatment=random.choice(['noIdentity','identity','identity','identity'])
+    player.treatment=random.choice(['noIdentity','identity','identity','identity','identity'])
     player.participant.treatment = player.treatment
     player.participant.treatmentThreshold1=random.choice([3,4])
     player.orderOfApps = random.choice([1,1,1,2])

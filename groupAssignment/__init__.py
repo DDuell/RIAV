@@ -425,12 +425,12 @@ class results(Page):
       player.participant.numStage = player.participant.numStage + 1
       if (player.treatment == 'identity'):
         if (player.groupID == 'Klee'):
-          if(player.participant.groupCompositionRandomNumber<=17):
+          if(player.participant.groupCompositionRandomNumber<=25):
             player.otherGroupID1 = 'Kandinsky'
             player.otherGroupID2 = 'Kandinsky'
             player.otherGroupID3 = 'Kandinsky'
-          elif(player.participant.groupCompositionRandomNumber>17 and 
-            player.participant.groupCompositionRandomNumber<=34):
+          elif(player.participant.groupCompositionRandomNumber>25 and 
+            player.participant.groupCompositionRandomNumber<=50):
             if(player.participant.groupCompositionRandomNumber_1==1):
               player.otherGroupID1 = 'Kandinsky'
               player.otherGroupID2 = 'Kandinsky'
@@ -443,8 +443,8 @@ class results(Page):
               player.otherGroupID1 = 'Klee'
               player.otherGroupID2 = 'Kandinsky'
               player.otherGroupID3 = 'Kandinsky'
-          elif(player.participant.groupCompositionRandomNumber>34 and 
-            player.participant.groupCompositionRandomNumber<=50):
+          elif(player.participant.groupCompositionRandomNumber>50 and 
+            player.participant.groupCompositionRandomNumber<=75):
             if(player.participant.groupCompositionRandomNumber_1==1):
               player.otherGroupID1 = 'Kandinsky'
               player.otherGroupID2 = 'Klee'
@@ -463,12 +463,12 @@ class results(Page):
             player.otherGroupID3 = 'Klee'
       
         else:
-          if(player.participant.groupCompositionRandomNumber<=17):
+          if(player.participant.groupCompositionRandomNumber<=25):
             player.otherGroupID1 = 'Klee'
             player.otherGroupID2 = 'Klee'
             player.otherGroupID3 = 'Klee'
-          elif(player.participant.groupCompositionRandomNumber>17 and 
-            player.participant.groupCompositionRandomNumber<=34):
+          elif(player.participant.groupCompositionRandomNumber>25 and 
+            player.participant.groupCompositionRandomNumber<=50):
             if(player.participant.groupCompositionRandomNumber_1==1):
               player.otherGroupID1 = 'Klee'
               player.otherGroupID2 = 'Klee'
@@ -481,8 +481,8 @@ class results(Page):
               player.otherGroupID1 = 'Klee'
               player.otherGroupID2 = 'Kandinsky'
               player.otherGroupID3 = 'Klee'
-          elif(player.participant.groupCompositionRandomNumber>34 and 
-            player.participant.groupCompositionRandomNumber<=50):
+          elif(player.participant.groupCompositionRandomNumber>50 and 
+            player.participant.groupCompositionRandomNumber<=75):
             if(player.participant.groupCompositionRandomNumber_1==1):
               player.otherGroupID1 = 'Klee'
               player.otherGroupID2 = 'Kandinsky'
